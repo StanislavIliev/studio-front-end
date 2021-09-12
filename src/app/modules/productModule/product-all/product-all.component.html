@@ -1,0 +1,35 @@
+<section id="cover" class="min-vh-100">
+  <div id="cover-caption">
+    <div class="container">
+<div class="ms-content-wrapper">
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-6">
+      <div *ngFor = "let product of products">
+
+        <div class="ms-card">
+          <div class="ms-card-body">
+            <div class="ms-panel-custom">
+              <h4>{{ product.name }}</h4>
+              <span class="ms-text-primary">{{ product.price }} £ </span>
+            </div>
+
+            <p>{{ product.description }}</p>
+            <div class="ms-panel-custom">
+              <a [routerLink]="['/product-update',product.id]" class="btn btn-primary mr-2  ms-custom-btn">Update</a>
+              <button (click)="deleteProductById(product)" class="btn btn-danger mr-2">Delete</button>
+            </div>
+            <div>
+              <button (click)="addProductToCart(product)" class="btn btn-primary mr-2">Add to Cart</button>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+  </div>
+</section>

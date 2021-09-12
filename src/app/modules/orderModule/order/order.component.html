@@ -1,0 +1,46 @@
+<div>
+  <section id="cover" class="min-vh-100">
+    <div id="cover-caption">
+      <div class="container">
+        <div class="row text-white">
+          <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+            <div class="px-2">
+              <form action="" [formGroup]="addOrderForm" (submit)="addOrder()" class="justify-content-center">
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <input type="text" class="form-control" placeholder="description" formControlName="description">
+                  <div
+                    *ngIf="addOrderForm.get('description').invalid && addOrderForm.get('description').touched">
+                    <small *ngIf="addOrderForm.get('description').errors?.required"
+                           class="alert alert-danger form-text text-center">Required!</small>
+                    <small *ngIf="addOrderForm.get('description').hasError('pattern')"
+                           class="alert alert-danger form-text text-center">Incorrect description!</small>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="procedure">Procedure Type</label>
+                  <select class="form-control" placeholder="procedure" formControlName="procedure">
+                    <option value="">SELECT</option>
+                    <option value="MANICURE">MANICURE</option>
+                    <option value="PEDICURE">PEDICURE</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="product">Product</label>
+                  <select class="form-control" placeholder="product" formControlName="product">
+                    <option value="">SELECT</option>
+                    <option value="OIL">OIL</option>
+                    <option value="FILE">FILE</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

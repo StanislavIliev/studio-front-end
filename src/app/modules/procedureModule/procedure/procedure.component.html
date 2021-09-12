@@ -1,0 +1,59 @@
+<div>
+  <section id="cover" class="min-vh-100">
+    <div id="cover-caption">
+      <div class="container">
+        <div class="row text-white">
+          <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+            <div class="px-2">
+              <form action="" [formGroup]="addProcedureForm" (submit)="addProcedure()" class="justify-content-center">
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <input type="text" class="form-control" placeholder="description" formControlName="description">
+                  <div
+                    *ngIf="addProcedureForm.get('description').invalid && addProcedureForm.get('description').touched">
+                    <small *ngIf="addProcedureForm.get('description').errors?.required"
+                           class="alert alert-danger form-text text-center">Required!</small>
+                    <small *ngIf="addProcedureForm.get('description').hasError('pattern')"
+                           class="alert alert-danger form-text text-center">Incorrect description!</small>
+                  </div>
+                <div class="form-group">
+                  <label for="price">Price</label>
+                  <input type="number" class="form-control" placeholder="price" formControlName="price">
+                  <div
+                    *ngIf="addProcedureForm.get('price').invalid && addProcedureForm.get('price').touched">
+                    <small *ngIf="addProcedureForm.get('price').errors?.required"
+                           class="alert alert-danger form-text text-center">Required!</small>
+                    <small *ngIf="addProcedureForm.get('price').hasError('pattern')"
+                           class="alert alert-danger form-text text-center">Incorrect price!</small>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="name">Type procedure</label>
+                  <select class="form-control"  placeholder="name" formControlName="name">
+                    <option value="">SELECT</option>
+                    <option value="MANICURE">MANICURE</option>
+                    <option value="PEDICURE">PEDICURE</option>
+                    <option value="FULL_PEDICURE">FULL_PEDICURE</option>
+                  </select>
+                </div>
+
+
+                  <div>
+                    <label for="date">Date of the procedure</label>
+                    <input type="datetime-local"  class="form-control"
+                           placeholder="date"  formControlName="date"
+                           mdc-datetime-picker="date">
+                  </div>
+
+
+                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,48 @@
+<div>
+  <section id="cover" class="min-vh-100">
+    <div id="cover-caption">
+      <div class="container">
+        <div class="row text-white">
+          <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+            <div class="px-2">
+              <form action="" [formGroup]="addProductForm" (submit)="addProduct()" class="justify-content-center">
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <input type="text" class="form-control" placeholder="description" formControlName="description">
+                  <div
+                    *ngIf="addProductForm.get('description').invalid && addProductForm.get('description').touched">
+                    <small *ngIf="addProductForm.get('description').errors?.required"
+                           class="alert alert-danger form-text text-center">Required!</small>
+                    <small *ngIf="addProductForm.get('description').hasError('pattern')"
+                           class="alert alert-danger form-text text-center">Incorrect description!</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control" placeholder="price" formControlName="price">
+                    <div
+                      *ngIf="addProductForm.get('price').invalid && addProductForm.get('price').touched">
+                      <small *ngIf="addProductForm.get('price').errors?.required"
+                             class="alert alert-danger form-text text-center">Required!</small>
+                      <small *ngIf="addProductForm.get('price').hasError('pattern')"
+                             class="alert alert-danger form-text text-center">Incorrect price!</small>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="name">Type procedure</label>
+                    <select class="form-control" placeholder="name" formControlName="name">
+                      <option value="">SELECT</option>
+                      <option value="OIL">OIL</option>
+                      <option value="FILE">FILE</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                </div>
+             </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,35 @@
+<section id="cover" class="min-vh-100">
+  <div id="cover-caption">
+    <div class="container">
+<div class="ms-content-wrapper">
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-6">
+      <div *ngFor = "let procedure of procedures">
+
+        <div class="ms-card">
+          <div class="ms-card-body">
+            <div class="ms-panel-custom">
+              <h4>{{ procedure.name }}</h4>
+              <span class="ms-text-primary">{{ procedure.price }} £ </span>
+            </div>
+            <p>{{ procedure.date }}</p>
+            <p>{{ procedure.description }}</p>
+
+            <div class="ms-panel-custom">
+              <a [routerLink]="['/procedure-update',procedure.id]" class="btn btn-primary mr-2  ms-custom-btn">Update</a>
+              <button (click)="deleteProcedureById(procedure)" class="btn btn-danger mr-2">Delete</button>
+            </div>
+            <div>
+              <button (click)="addProcedureToCart(procedure)" class="btn btn-primary mr-2">Add to Cart</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+    </div>
+    </div>
+</section>

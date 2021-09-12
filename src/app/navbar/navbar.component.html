@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active" >
+        <a class="nav-link" routerLink="/">Home</a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link"  routerLink="/login">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/register">Register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/user-update">Update User</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown06" data-bs-toggle="dropdown" aria-expanded="false">Products</a>
+        <ul class="dropdown-menu" aria-labelledby="dropdown06">
+          <li><a class="dropdown-item" routerLink="/product">Add product</a></li>
+          <li><a class="dropdown-item" routerLink="/product-all">All products</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown06" data-bs-toggle="dropdown" aria-expanded="false">Procedures</a>
+        <ul class="dropdown-menu" aria-labelledby="dropdown06">
+          <li><a class="dropdown-item" routerLink="/procedure">Add procedure</a></li>
+          <li><a class="dropdown-item" routerLink="/procedure-all">All procedures</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown06" data-bs-toggle="dropdown" aria-expanded="false">Orders</a>
+        <ul class="dropdown-menu" aria-labelledby="dropdown06">
+          <li><a class="dropdown-item" routerLink="/order">Add order</a></li>
+          <li><a class="dropdown-item" routerLink="/orders-all">All orders</a></li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/contact">Contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/cart">Cart</a>
+      </li>
+      <li class="nav-item">
+        <a type="button" class="nav-link" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+

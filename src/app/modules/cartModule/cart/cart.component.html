@@ -1,0 +1,51 @@
+<section>
+  <div class="spacer">
+    <div class="container">
+      <div class="row mt-5">
+        <div class="col-lg-9">
+          <div class="row shop-listing">
+            <table class="table shop-table" *ngIf="cart.products">
+              <tr>
+                <th class="b-0">Item</th>
+                <th class="b-0">Description</th>
+                <th class="b-0">Price</th>
+                <th class="b-0 text-right">Date</th>
+                <th class="b-0">Delete item</th>
+              </tr>
+              <tr *ngFor="let product of cart.products">
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td class="text-right">
+                  <h5 class="font-medium m-b-30">{{ product.price }} $</h5>
+                </td>
+                <td>
+
+                </td>
+                <td>
+                  <button (click)="deleteProductFromCart(product)" class="btn btn-danger mr-2">Delete</button>
+                </td>
+              </tr>
+              <tr *ngFor="let procedure of cart.procedures">
+                <td>{{ procedure.name }}</td>
+                <td>{{ procedure.description }}</td>
+                <td class="text-right">
+                  <h5 class="font-medium m-b-30">{{ procedure.price }} $</h5>
+                </td>
+                <td> {{ procedure.date }}</td>
+                <td>
+                  <button (click)="deleteProcedureFromCart(procedure)" class="btn btn-danger mr-2">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <!-- <td colspan="3" align="right">Subtotal :{{ getSubtotal() }}</td> -->
+                <td colspan="4">
+                  <button class="btn btn-danger" (click)="emptyCart()">Empty Cart</button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

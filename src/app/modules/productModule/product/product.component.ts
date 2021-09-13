@@ -4,7 +4,9 @@ import {Product} from '../../../models/product';
 import {Router} from '@angular/router';
 import {ProductService} from '../../../services/productService';
 import {User} from '../../../models/user';
-
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.state';
+import { addProductStart } from '../state/product.actions';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -18,7 +20,8 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {
@@ -31,15 +34,14 @@ export class ProductComponent implements OnInit {
   }
 
   addProduct(): any {
-    const newProduct = {...this.addProductForm.value};
+    const newProduct: Product = {...this.addProductForm.value};
     console.log(newProduct);
-    this.productService.addProductForm(newProduct)
-      .subscribe((response) => {
-        this.product = response;
-        console.log(this.product);
-        this.router.navigate(['/product-all']);
-      });
+    this.store.dispatch(addProductStart({ newProduct }));
+    // this.actions$.pipe(ofType(addProductStart)).subscribe((response) => {})
+
   }
+
+  
 
   getOrderById(orderId: string): void{
     this.productService.getProductById(orderId)

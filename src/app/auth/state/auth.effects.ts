@@ -28,10 +28,10 @@ export class AuthEffects{
         ofType(loginStart),
         // take(1),
         exhaustMap((action) => {
-          return this.authService.login(action.auth).pipe(
+          return this.authService.login(action.user).pipe(
             map((response) => {
-              sessionStorage.setItem('userToken', response.refreshToken);
-              sessionStorage.setItem('userUsername', response.username);
+              sessionStorage.setItem('userToken', response.userToken);
+              sessionStorage.setItem('username', response.username);
               this.notifier.notify('success','Successfully logged in!');
               this.router.navigate(['/']);
               return loginSuccess({

@@ -6,21 +6,21 @@ export const LOGIN_START = '[login page] login start';
 export const LOGIN_SUCCESS = '[login page] login success';
 export const LOGIN_FAIL = '[login page] login fail';
 
-export const AUTO_LOGIN_ACTION = '[auth page]auto login';
-export const LOGOUT_ACTION = '[auth page]log out';
+export const AUTO_LOGIN_ACTION = '[auth page] auto login';
+export const LOGOUT_ACTION = '[auth page] log out';
 
 export const autoLogin = createAction(AUTO_LOGIN_ACTION);
 export const autoLogout = createAction(LOGOUT_ACTION);
 
-export const loginStart = createAction(LOGIN_START,props<{ auth: AuthResponse }>());
-export const loginSuccess = createAction(LOGIN_SUCCESS,props<{ user: AuthResponseData, message: string }>());
+export const loginStart = createAction(LOGIN_START,props<{ user: User }>());
+export const loginSuccess = createAction(LOGIN_SUCCESS,props<{ user: User, message: string }>());
 export const loginFail = createAction(LOGIN_FAIL,props<{ message: string}>());
 
 export const REGISTER_START = '[auth] register start';
 export const REGISTER_SUCCESS = '[auth] register success';
 export const REGISTER_FAIL = '[auth] register fail';
 
-export const registerStart = createAction(REGISTER_START, props<{auth: AuthResponse, user: User}>());
+export const registerStart = createAction(REGISTER_START, props<{user: User}>());
 export const registerSuccess = createAction(REGISTER_SUCCESS, props<{user: User, message: string}>());
 export const registerFail = createAction(REGISTER_FAIL, props<{message: string}>());
 

@@ -42,14 +42,8 @@ export class RegisterComponent implements OnInit {
   onRegister(){
     
     const user: User = { ...this.registerForm.value };
-    
-    const newUser: AuthResponse = {
-      username: user.username,
-      password: user.password,
-      returnSecureToken: true
-    }
 
-    this.store.dispatch(registerStart({ auth: newUser, user: user }));
+    this.store.dispatch(registerStart({ user: user }));
   }
   
 }

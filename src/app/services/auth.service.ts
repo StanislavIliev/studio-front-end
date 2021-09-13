@@ -25,12 +25,6 @@ export class AuthService {
   private http: HttpClient;
   private jwtHelper: JwtHelperService;
 
-
-
-
-
-
-
   constructor(http: HttpClient, private router: Router , private store:Store<AppState>, private cookieService: CookieService
     // private http: HttpClient
   ) {
@@ -40,6 +34,16 @@ export class AuthService {
     this.currentUserSubject = new BehaviorSubject<JwtResponse>(JSON.parse(memo));
     this.currentUser = this.currentUserSubject.asObservable();
     cookieService.set('currentUser', memo);
+  }
+
+
+   
+  login(user : User): Observable<User> {
+    return this.http.post<User>(`http://localhost:8080/users/login`,  user);
+  }
+
+  register(user: User): Observable<User> {
+    return this.http.post<User>(`http://localhost:8080/users/register`, user);
   }
 
 
@@ -59,10 +63,6 @@ export class AuthService {
       // this.sendMessage();
       // console.log(objToken.authorities);
     }
-  }
-
-  public register(user: User): Observable<User> {
-    return this.http.post<User>(`http://localhost:8080/users/register`, user);
   }
 
   public get currentUserValue(): any {
@@ -114,14 +114,7 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('user')).id;
   }
 
-  
-  login(user : AuthResponse): Observable<AuthResponseData> {
-    return this.http.post<AuthResponseData>(
-      `http://localhost:8080/users/login`,
-      { user, returnSecureToken: true }
-    );
-  }
-
+ 
   public isAdmin(role: string): boolean {
     return !!localStorage.getItem('admin');
   }

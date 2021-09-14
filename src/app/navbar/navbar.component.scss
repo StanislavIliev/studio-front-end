@@ -4,12 +4,16 @@
     width: 100%;
     text-align: center;
     margin-bottom: 0px;
+    margin-top: 0px;
     font-style: italic;
     word-spacing: 1px;
     text-transform: uppercase;
     text-shadow: black;
+    height: 3rem;
   }
   
-  .navbar .navbar-collapse {
-    text-align: center;
+
+  .navbar .navbar-nav .dropdown{
+    background-color: orangered;
+    color: orangered;
   }

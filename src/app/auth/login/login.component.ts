@@ -27,9 +27,9 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
-      const user: User = {...this.loginForm.value};
+     const auth: User = {...this.loginForm.value};
 
-     this.store.dispatch(loginStart({ user }));
+     this.store.dispatch(loginStart({ auth }));
     }
 
 }

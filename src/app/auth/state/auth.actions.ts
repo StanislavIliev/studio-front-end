@@ -1,18 +1,21 @@
 import { createAction, props } from "@ngrx/store";
-import { AuthResponse, AuthResponseData } from "src/app/models/auth.responsible";
 import { User } from "src/app/models/user";
 
 export const LOGIN_START = '[login page] login start';
 export const LOGIN_SUCCESS = '[login page] login success';
 export const LOGIN_FAIL = '[login page] login fail';
 
-export const AUTO_LOGIN_ACTION = '[auth page] auto login';
+export const AUTO_LOGIN_START = '[auth page] auto login start';
+export const AUTO_LOGIN_SUCCESS = '[auth page] auto login success';
+export const AUTO_LOGIN_FAIL = '[auth page] auto login fail';
 export const LOGOUT_ACTION = '[auth page] log out';
 
-export const autoLogin = createAction(AUTO_LOGIN_ACTION);
-export const autoLogout = createAction(LOGOUT_ACTION);
+export const autoLoginStart = createAction(AUTO_LOGIN_START);
+export const autoLoginSuccess = createAction(AUTO_LOGIN_SUCCESS);
+export const autoLoginFail = createAction(AUTO_LOGIN_FAIL,props<{message: string}>());
+export const authLogout = createAction(LOGOUT_ACTION);
 
-export const loginStart = createAction(LOGIN_START,props<{ user: User }>());
+export const loginStart = createAction(LOGIN_START,props<{ auth: User }>());
 export const loginSuccess = createAction(LOGIN_SUCCESS,props<{ user: User, message: string }>());
 export const loginFail = createAction(LOGIN_FAIL,props<{ message: string}>());
 

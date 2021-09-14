@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
-import { autoLogout } from '../auth/state/auth.actions';
+import { authLogout } from '../auth/state/auth.actions';
 import { isAuthenticated } from '../auth/state/auth.selector';
 @Component({
   selector: 'app-navbar',
@@ -10,15 +10,19 @@ import { isAuthenticated } from '../auth/state/auth.selector';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  isAuthenticated: Observable<boolean>;
-  constructor(private store: Store<AppState>) {}
 
+  isLogged: boolean=false;
+  
+  constructor(private store: Store<AppState>) {}
+  
   ngOnInit(): void {
-    this.isAuthenticated = this.store.select(isAuthenticated);
+    this.store.select(isAuthenticated).subscribe((bbb) => {
+      this.isLogged=bbb;
+    })
   }
 
   logout() {
-    this.store.dispatch(autoLogout());
+    this.store.dispatch(authLogout());
   }
 
 }

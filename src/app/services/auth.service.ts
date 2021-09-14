@@ -8,7 +8,7 @@ import {JwtResponse} from '../models/JwtResponse';
 import {CookieService} from 'ngx-cookie-service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
-import { autoLogout } from '../auth/state/auth.actions';
+import { authLogout } from '../auth/state/auth.actions';
 import { AuthResponse, AuthResponseData } from '../models/auth.responsible';
 
 @Injectable({
@@ -94,7 +94,7 @@ export class AuthService {
     const timeInterval = expirationDate - todaysDate;
 
     this.timeoutInterval = setTimeout(() => {
-      this.store.dispatch(autoLogout());
+      this.store.dispatch(authLogout());
       //logout functionality or get the refresh token
     }, timeInterval);
   }

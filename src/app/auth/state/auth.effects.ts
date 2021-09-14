@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect , ofType } from "@ngrx/effects";
-import { autoLogin, autoLogout, loginStart, loginSuccess, registerStart, registerSuccess, responsePasswordFail,
+import { autoLoginStart,autoLoginSuccess,autoLoginFail, authLogout,
+   loginStart, loginSuccess, registerStart, registerSuccess, responsePasswordFail,
      responsePasswordStart, responsePasswordSuccess } from "./auth.actions";
 import { AuthService } from '../../services/auth.service';
 import { catchError, exhaustMap , map ,mergeMap,tap} from 'rxjs/operators';
@@ -28,7 +29,7 @@ export class AuthEffects{
         ofType(loginStart),
         // take(1),
         exhaustMap((action) => {
-          return this.authService.login(action.user).pipe(
+          return this.authService.login(action.auth).pipe(
             map((response) => {
               sessionStorage.setItem('userToken', response.userToken);
               sessionStorage.setItem('username', response.username);
@@ -42,13 +43,26 @@ export class AuthEffects{
           );
         }),
         catchError(() => {
-        //  this.notifier.notify('error','Error occured!','id5');
+           this.notifier.notify('error','Error occured!');
           return EMPTY;
         })
       );
     });
   
-
+    auto_login$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(autoLoginStart),
+        map((action) => {
+          const username: string = sessionStorage.getItem('username');
+          if (!!username) {
+            return autoLoginSuccess();
+          } else {
+            return autoLoginFail({ message: 'Login fail' });
+          }
+        })
+      );
+    });
+  
     register$ = createEffect(() => {
       return this.actions$.pipe(
         ofType(registerStart),
@@ -56,7 +70,7 @@ export class AuthEffects{
           return this.authService.register(action.user).pipe(
             map((data) => {
               this.store.dispatch(registerSuccess({user: action.user,message: "You have registered."})); 
-              // this.notifier.notify('success','Successfully registered!');
+              this.notifier.notify('success','Successfully registered!');
               this.router.navigate(['/auth/login']);
               return registerSuccess({
                 user: data,
@@ -71,9 +85,27 @@ export class AuthEffects{
            // errResp.error.error.message
           // );
           // return of(setErrorMessage({ message: errorMessage }));
+          this.notifier.notify('error','Error occured!');
           return EMPTY;
         })
       );
     });
-  
+
+    
+    
+  logout$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(authLogout),
+        map((action) => {
+          sessionStorage.clear();
+          // this.authService.logOut();
+          this.notifier.notify('success','Successfully logged out!');
+          this.router.navigate(['/login']);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
 }

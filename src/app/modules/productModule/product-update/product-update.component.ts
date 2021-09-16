@@ -4,6 +4,8 @@ import {Product} from '../../../models/product';
 import {User} from '../../../models/user';
 import {ProductService} from '../../../services/productService';
 import {ActivatedRoute, Router} from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-product-update',
@@ -11,6 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./product-update.component.scss']
 })
 export class ProductUpdateComponent implements OnInit {
+ 
   updateProductForm: FormGroup;
   product: Product = new Product();
   user: User = JSON.parse(localStorage.getItem('user'));
@@ -19,7 +22,8 @@ export class ProductUpdateComponent implements OnInit {
   constructor(
     private productService: ProductService ,
     private router: Router,
-    private r: ActivatedRoute
+    private r: ActivatedRoute,
+    private store: Store<AppState>
   ) {
     this.getProductById();
   }

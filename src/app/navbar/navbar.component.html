@@ -20,14 +20,18 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown06" data-bs-toggle="dropdown" aria-expanded="false">Products</a>
         <ul class="dropdown-menu" aria-labelledby="dropdown06">
-          <li><a class="dropdown-item" routerLink="/product">Add product</a></li>
+          <li *ngIf="isLogged">
+            <a class="dropdown-item" routerLink="/product">Add product</a>
+          </li>
           <li><a class="dropdown-item" routerLink="/product-all">All products</a></li>
         </ul>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown06" data-bs-toggle="dropdown" aria-expanded="false">Procedures</a>
         <ul class="dropdown-menu" aria-labelledby="dropdown06">
-          <li><a class="dropdown-item" routerLink="/procedure">Add procedure</a></li>
+          <li *ngIf="isLogged">
+            <a class="dropdown-item" routerLink="/procedure">Add procedure</a>
+          </li>
           <li><a class="dropdown-item" routerLink="/procedure-all">All procedures</a></li>
         </ul>
       </li>

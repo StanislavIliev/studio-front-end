@@ -4,11 +4,12 @@ import {AuthService} from '../../../services/auth.service';
 import {Product} from '../../../models/product';
 import {ProductService} from '../../../services/productService';
 import {User} from '../../../models/user';
-import { Store } from '@ngrx/store';
+import { Store , ActionsSubject } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { Observable } from 'rxjs';
-import { getProducts } from '../state/product.selector';
-import { allProductsStart } from '../state/product.actions';
+import { allProductsStart,ALL_PRODUCTS_SUCCESS } from '../state/product.actions';
+import { ofType } from '@ngrx/effects';
+ 
 
 @Component({
   selector: 'app-product-all',
@@ -25,11 +26,16 @@ export class ProductAllComponent implements OnInit {
     private router: Router,
     private store: Store<AppState>,
     private authService: AuthService,
-    private productService: ProductService) { }
+    private productService: ProductService,
+    private actionListener: ActionsSubject
+    ) {
+      this.store.dispatch(allProductsStart());
+     }
 
     ngOnInit(): void {
-      this.products = this.store.select(getProducts);
-      this.store.dispatch(allProductsStart());
+      this.actionListener.pipe(ofType(ALL_PRODUCTS_SUCCESS)).subscribe((data:any)=>{
+        this.products= data.products;
+      });
     }
   
   

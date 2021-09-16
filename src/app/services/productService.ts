@@ -36,7 +36,7 @@ export class ProductService {
   }
 
 
-  getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://localhost:8080/products/all');
+  getAllProducts(): Observable<any> {
+    return this.http.get<any>('http://localhost:8080/products/all');
   }
 }

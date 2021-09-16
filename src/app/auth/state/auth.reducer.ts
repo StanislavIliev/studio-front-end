@@ -30,7 +30,6 @@ on(registerSuccess, (state, action) => {
     user: action.user,
   };
 }),
-
 on( authLogout, (state) => {
   return {
     ...state,

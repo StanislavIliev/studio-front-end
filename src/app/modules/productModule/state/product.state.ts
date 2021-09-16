@@ -1,9 +1,9 @@
-import { createEntityAdapter, EntityState } from "@ngrx/entity";
 import { Product } from "src/app/models/product";
 
-export interface ProductState extends EntityState<Product>{
+export interface ProductState{
+    products: Product[];
 }
-export const productAdapter =  createEntityAdapter<Product>();
 
-export const initialState: ProductState = productAdapter.getInitialState();
-
+export const initialState: ProductState = {
+    products: null
+ };

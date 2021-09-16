@@ -8,7 +8,7 @@ export class Product {
   constructor() {
     this.id = null,
     this.name = '',
-      this.description = '';
+    this.description = '';
     this.price = null;
   }
 }

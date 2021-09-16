@@ -23,7 +23,16 @@ export const UPDATE_PRODUCT_SUCCESS = '[user] update product success';
 export const UPDATE_PRODUCT_FAIL = '[user] update product fail';
 
 export const updateProductStart = createAction(UPDATE_PRODUCT_START, props<{product: Product}>());
-export const updateProductSuccess = createAction(UPDATE_PRODUCT_SUCCESS, props<{product: Product , message: string}>());
+export const updateProductSuccess = createAction(UPDATE_PRODUCT_SUCCESS, props<{product: Product }>());
 export const updateProductFail = createAction(UPDATE_PRODUCT_FAIL, props<{message: string}>());
+
+
+export const DELETE_PRODUCT_START = '[user] delete product start';
+export const DELETE_PRODUCT_SUCCESS = '[user] delete product success';
+export const DELETE_PRODUCT_FAIL = '[user] delete product fail';
+
+export const deleteProductStart = createAction(DELETE_PRODUCT_START, props<{product: Product}>());
+export const deleteProductSuccess = createAction(DELETE_PRODUCT_SUCCESS, props<{product: Product , id: string}>());
+export const deleteProductFail = createAction(DELETE_PRODUCT_FAIL, props<{message: string}>());
 
 export const dummyAction = createAction('[dummy action]');

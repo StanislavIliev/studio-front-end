@@ -6,7 +6,8 @@ import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
 import { EMPTY } from "rxjs";
 import { ProductService } from "src/app/services/productService";
-import { addProductStart, addProductSuccess,allProductsStart, allProductsSuccess, dummyAction, updateProductStart, updateProductSuccess } from "./product.actions";
+import { addProductStart, addProductSuccess,allProductsStart, allProductsSuccess, deleteProductStart, deleteProductSuccess
+   , updateProductStart, updateProductSuccess , dummyAction } from "./product.actions";
 import { Product } from "src/app/models/product";
 
 
@@ -72,37 +73,18 @@ updateProduct$ = createEffect(() => {
   );
  });
 
-//  updatePostRedirect$ = createEffect(() => {
-//   return this.actions$.pipe(
-//     ofType(...[updatePostSuccess,updatePost]),
-//     tap((action) => {
-//     //  this.store.dispatch(setErrorMessage({ message: '' }));
-//       this.router.navigate(['/posts']);
-//     })
-//     );
-// },
-// { dispatch: false });
+ deleteProduct$ = createEffect(() => {
+  return this.actions$.pipe(
+    ofType(deleteProductStart),
+    switchMap((action) => {
+      return this.productService.deleteProductById(action.id).pipe(
+        map((data) => {
+          return deleteProductSuccess({ id: action.id });
+        })
+      );
+    })
+  );
+});
 
-//
-//  getsinglePost$ = createEffect(() => {
-//    return this.actions$.pipe(ofType(ROUTER_NAVIGATION),
-//    filter((r: RouterNavigatedAction) => {
-//     return r.payload.routerState.url.startsWith('/product/details');
-//    }), map((r : RouterNavigatedAction) => {
-//      return r.payload.routerState['params']['id'];
-//    }),
-//    withLatestFrom(this.store.select(getProducts)),
-//    switchMap(([id, products]) => {
-//      if(!products.length){
-//      return this.productService.getProductById(id).pipe(
-//        map((product) => {
-//        const productData = [{...product,id}];
-//        return allProductsSuccess({ products : productData});
-//      })
-//      );
-//     }
-//     return of(dummyAction());
-//    })
-//    );
-//  });
+
 }

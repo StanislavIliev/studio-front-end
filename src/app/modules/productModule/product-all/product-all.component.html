@@ -16,7 +16,7 @@
             <p>{{ product.description }}</p>
             <div class="ms-panel-custom">
               <a [routerLink]="['/product-update',product.id]" class="btn btn-primary mr-2  ms-custom-btn">Update</a>
-              <button (click)="deleteProductById(product)" class="btn btn-danger mr-2">Delete</button>
+              <button (click)="deleteProduct(product.id)" class="btn btn-danger mr-2">Delete</button>
             </div>
             <div>
               <button (click)="addProductToCart(product)" class="btn btn-primary mr-2">Add to Cart</button>

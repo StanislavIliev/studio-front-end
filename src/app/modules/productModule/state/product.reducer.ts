@@ -7,16 +7,16 @@ export const PRODUCT_STATE_NAME = 'product';
 
 const _productReducer = createReducer(
   initialState,
-  on(addProductSuccess, (state, action ) => {
-    let product = { ...action.product };
-  return {
-    ...state,
-    products: [
-      ...state.products,
-    product
-  ],
-};
-}), 
+//   on(addProductSuccess, (state, action ) => {
+//     let product = { ...action.product };
+//   return {
+//     ...state,
+//     products: [
+//       ...state.products,
+//     product
+//   ],
+// };
+// }), 
 on(updateProductSuccess, (state, action) => {
       const updatedProducts = state.products.map((product)=>{
         return action.product.id === product.id ? action.product : product;

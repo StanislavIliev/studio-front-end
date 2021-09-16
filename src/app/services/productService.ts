@@ -17,8 +17,8 @@ export class ProductService {
     return this.http.post<Product>(`http://localhost:8080/products/add`, product);
   }
 
-  deleteProductById(product: Product): Observable<Product> {
-    return this.http.post(`http://localhost:8080/products/delete/`, product);
+  deleteProductById(id: string): Observable<Product> {
+    return this.http.post(`http://localhost:8080/products/delete/`, id);
   }
 
   updateProduct(product: Product): Observable<Product> {

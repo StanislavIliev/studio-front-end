@@ -7,7 +7,7 @@ import {User} from '../../../models/user';
 import { Store , ActionsSubject } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { Observable } from 'rxjs';
-import { allProductsStart,ALL_PRODUCTS_SUCCESS } from '../state/product.actions';
+import { allProductsStart,ALL_PRODUCTS_SUCCESS, deleteProductStart } from '../state/product.actions';
 import { ofType } from '@ngrx/effects';
  
 
@@ -38,14 +38,14 @@ export class ProductAllComponent implements OnInit {
       });
     }
   
-  
-  deleteProductById(product: Product): void {
+    deleteProduct(id: string) {
+      if (confirm('Are you sure you want to delete')) {
+        this.router.navigate(['/']);
 
-    this.productService.deleteProductById(product)
-      .subscribe((resp) => { console.log(resp); });
+        this.store.dispatch(deleteProductStart({ id }));
 
-    this.router.navigate(['/product-all']);
-  }
+      }
+    }
   
 
   addProductToCart(product: Product): void{

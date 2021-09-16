@@ -31,8 +31,8 @@ export const DELETE_PRODUCT_START = '[user] delete product start';
 export const DELETE_PRODUCT_SUCCESS = '[user] delete product success';
 export const DELETE_PRODUCT_FAIL = '[user] delete product fail';
 
-export const deleteProductStart = createAction(DELETE_PRODUCT_START, props<{product: Product}>());
-export const deleteProductSuccess = createAction(DELETE_PRODUCT_SUCCESS, props<{product: Product , id: string}>());
+export const deleteProductStart = createAction(DELETE_PRODUCT_START, props<{ id: string}>());
+export const deleteProductSuccess = createAction(DELETE_PRODUCT_SUCCESS, props<{ id: string}>());
 export const deleteProductFail = createAction(DELETE_PRODUCT_FAIL, props<{message: string}>());
 
 export const dummyAction = createAction('[dummy action]');

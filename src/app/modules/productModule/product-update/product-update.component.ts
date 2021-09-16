@@ -1,46 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , OnDestroy} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Product} from '../../../models/product';
-import {User} from '../../../models/user';
-import {ProductService} from '../../../services/productService';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
+import { updateProductStart } from "../state/product.actions";
+import { Subscription } from 'rxjs';
+import { getProductById } from '../state/product.selector';
 
 @Component({
   selector: 'app-product-update',
   templateUrl: './product-update.component.html',
   styleUrls: ['./product-update.component.scss']
 })
-export class ProductUpdateComponent implements OnInit {
+export class ProductUpdateComponent implements OnInit , OnDestroy {
  
   updateProductForm: FormGroup;
-  product: Product = new Product();
-  user: User = JSON.parse(localStorage.getItem('user'));
-  private productId = '';
+  product: Product;
+  productSubscription: Subscription;
 
   constructor(
-    private productService: ProductService ,
     private router: Router,
     private r: ActivatedRoute,
     private store: Store<AppState>
   ) {
-    this.getProductById();
+    
   }
 
 
   ngOnInit(): void {
+    this.r.paramMap.subscribe((params) => {
+      const id = params.get('id');
+      this.productSubscription = this.store
+        .select(getProductById, { id })
+        .subscribe((data) => {
+          this.product = data;
+          this.parseProductInfo();
+        });
+    });
+     // this.getProductById();
   }
 
-  getProductById(): void{
-    this.productId = this.r.snapshot.params.id;
-    this.productService.getProductById(this.productId)
-      .subscribe((response) => {
-        this.product = response;
-        console.log(this.product);
-        this.parseProductInfo();
-      });
-  }
+  // getProductById(): void{
+  //   this.productId = this.r.snapshot.params.id;
+  //   this.productService.getProductById(this.productId)
+  //     .subscribe((response) => {
+  //       this.product = response;
+  //       console.log(this.product);
+  //       this.parseProductInfo();
+  //     });
+  // }
 
   parseProductInfo(): any{
     this.updateProductForm = new FormGroup({
@@ -53,15 +62,27 @@ export class ProductUpdateComponent implements OnInit {
   }
 
   updateProduct(): any {
-    const updatedProduct = {...this.updateProductForm.value};
-    updatedProduct.id = this.product.id;
-    console.log(updatedProduct);
-    this.productService.updateProduct(updatedProduct)
-      .subscribe((response) => {
-        this.product = response;
-        console.log(this.product);
-        this.router.navigate(['/']);
-      });
+    if (!this.updateProductForm.valid) {
+      return;
+    }
+    const description = this.updateProductForm.value.description;
+    const price = this.updateProductForm.value.price;
+    const name = this.updateProductForm.value.name;
 
+    const product: Product = {
+      id: this.product.id,
+      description,
+      price,
+      name
+    };
+
+    this.store.dispatch(updateProductStart({ product }));
+    this.router.navigate(['/product-all']);
+}
+
+  ngOnDestroy() {
+  if (this.productSubscription) {
+    this.productSubscription.unsubscribe();
   }
+}
 }

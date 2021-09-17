@@ -14,9 +14,6 @@ import { OrderUpdateComponent } from './modules/orderModule/order-update/order-u
 import { OrderDetailsComponent } from './modules/orderModule/order-details/order-details.component';
 import { OrdersAllComponent } from './modules/orderModule/orders-all/orders-all.component';
 import { CartComponent } from './modules/cartModule/cart/cart.component';
-import { ProcedureComponent } from './modules/procedureModule/procedure/procedure.component';
-import { ProcedureAllComponent } from './modules/procedureModule/procedure-all/procedure-all.component';
-import { ProcedureUpdateComponent } from './modules/procedureModule/procedure-update/procedure-update.component';
 import { StoreModule } from '@ngrx/store';
 import { appReducer } from './store/app.state';
 import { EffectsModule } from '@ngrx/effects';
@@ -29,6 +26,7 @@ import { AuthTokenInterceptor } from './services/auth.interceptor';
 import { NotifierModule } from 'angular-notifier';
 import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './modules/productModule/product.module';
+import { ProcedureModule } from './modules/procedureModule/procedure.module';
 
 @NgModule({
   declarations: [
@@ -43,10 +41,7 @@ import { ProductModule } from './modules/productModule/product.module';
     OrderDetailsComponent,
     OrdersAllComponent,
     CartComponent,
-    ProcedureComponent,
-    ProcedureAllComponent,
-    ProcedureUpdateComponent,
-  ],
+   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -59,6 +54,7 @@ import { ProductModule } from './modules/productModule/product.module';
         StoreRouterConnectingModule.forRoot({ serializer: CustomSerializer}),
         AuthModule,
         ProductModule,
+        ProcedureModule,
         NotifierModule.withConfig({
           position: {
             horizontal: {

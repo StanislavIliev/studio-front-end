@@ -19,13 +19,13 @@ export class ProcedureService {
     return this.http.post<ProcedureAndUserId>('http://localhost:8080/carts/add-procedure', pui);
   }
 
-  addProcedureForm(procedure: Procedure): Observable<Procedure> {
+  addProcedure(procedure: Procedure): Observable<Procedure> {
     return this.http.post<Procedure>(`http://localhost:8080/procedures/add`, procedure);
   }
 
 
-  deleteProcedureById(procedure: Procedure): Observable<Procedure> {
-    return this.http.post(`http://localhost:8080/procedures/delete/`, procedure);
+  deleteProcedureById(id: string): Observable<Procedure> {
+    return this.http.post(`http://localhost:8080/procedures/delete/`, id);
   }
 
   getProcedureById(id: string): Observable<Procedure>{

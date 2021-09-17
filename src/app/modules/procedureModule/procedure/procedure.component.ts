@@ -4,6 +4,9 @@ import {Procedure} from '../../../models/procedure';
 import {User} from '../../../models/user';
 import {Router} from '@angular/router';
 import { ProcedureService } from '../../../services/procedureService';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.state';
+import { addProcedureStart } from '../state/procedure.actions';
 
 
 
@@ -21,7 +24,8 @@ export class ProcedureComponent implements OnInit {
   endDate = new Date(2021, 2, 16, 0, 0, 0, 0);
   constructor(
     private router: Router,
-    private procedureService: ProcedureService
+    private procedureService: ProcedureService,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {
@@ -30,19 +34,17 @@ export class ProcedureComponent implements OnInit {
       price: new FormControl(null),
       name: new FormControl(null),
       date: new FormControl(null, [ Validators.required]),
-      user: new FormControl(this.user)
+      // user: new FormControl(this.user)
     });
   }
 
   addProcedure(): any {
-    const newProcedure = {...this.addProcedureForm.value};
-    console.log(newProcedure);
-    this.procedureService.addProcedureForm(newProcedure)
-      .subscribe((response) => {
-        this.procedure = response;
-        console.log(this.procedure);
-        this.router.navigate(['/procedure-all']);
-      });
+    
+      const newProcedure: Procedure = {...this.addProcedureForm.value};
+      console.log(newProcedure);
+      this.store.dispatch(addProcedureStart({ newProcedure }));
+      // this.actions$.pipe(ofType(addProcedureStart)).subscribe((response) => {})
+  
   }
 
   getOrderById(orderId: string): void{

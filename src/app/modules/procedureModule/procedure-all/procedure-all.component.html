@@ -17,7 +17,7 @@
 
             <div class="ms-panel-custom">
               <a [routerLink]="['/procedure-update',procedure.id]" class="btn btn-primary mr-2  ms-custom-btn">Update</a>
-              <button (click)="deleteProcedureById(procedure)" class="btn btn-danger mr-2">Delete</button>
+              <button (click)="deleteProcedure(procedure.id)" class="btn btn-danger mr-2">Delete</button>
             </div>
             <div>
               <button (click)="addProcedureToCart(procedure)" class="btn btn-primary mr-2">Add to Cart</button>

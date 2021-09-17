@@ -2,9 +2,6 @@ import { createReducer, on } from "@ngrx/store";
 import { deleteProductSuccess, allProductsSuccess, addProductSuccess, updateProductSuccess } from "./product.actions";
 import { initialState } from "./product.state";
 
-
-export const PRODUCT_STATE_NAME = 'product';
-
 const _productReducer = createReducer(
   initialState,
 //   on(addProductSuccess, (state, action ) => {

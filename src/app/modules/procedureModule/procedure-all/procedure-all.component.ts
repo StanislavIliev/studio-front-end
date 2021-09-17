@@ -3,6 +3,11 @@ import {Router} from '@angular/router';
 import {Procedure} from '../../../models/procedure';
 import {ProcedureService} from '../../../services/procedureService';
 import {AuthService} from '../../../services/auth.service';
+import { ofType } from '@ngrx/effects';
+import { allProceduresStart, ALL_PROCEDURES_SUCCESS, deleteProcedureStart } from '../state/procedure.actions';
+import { Store,ActionsSubject } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.state';
+ 
 
 
 @Component({
@@ -17,21 +22,23 @@ export class ProcedureAllComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private procedureService: ProcedureService) { }
+    private procedureService: ProcedureService,
+    private actionListener: ActionsSubject,
+    private store: Store<AppState>
+    ) { 
+      this.store.dispatch(allProceduresStart());
+    }
 
-  ngOnInit(): void {
-    this.procedureService.getAllProcedures().subscribe((response) => {
-      this.procedures = response;
-    });
-    this.router.navigate(['/procedure-all']);
+  ngOnInit(): void {      
+    this.actionListener.pipe(ofType(ALL_PROCEDURES_SUCCESS)).subscribe((data:any)=>{
+    this.procedures= data.procedures;
+  });
   }
 
-  deleteProcedureById(procedure: Procedure): void {
-
-    this.procedureService.deleteProcedureById(procedure)
-      .subscribe((resp) => { console.log(resp); });
-
-    this.router.navigate(['/procedure-all']);
+  deleteProcedure(id: string) {
+    if (confirm('Are you sure you want to delete')) {
+      this.store.dispatch(deleteProcedureStart({ id }));
+    }
   }
 
   addProcedureToCart(procedure: Procedure): void{

@@ -40,10 +40,7 @@ export class ProductAllComponent implements OnInit {
   
     deleteProduct(id: string) {
       if (confirm('Are you sure you want to delete')) {
-        this.router.navigate(['/']);
-
         this.store.dispatch(deleteProductStart({ id }));
-
       }
     }
   

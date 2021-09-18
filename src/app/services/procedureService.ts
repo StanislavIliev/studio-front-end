@@ -40,4 +40,5 @@ export class ProcedureService {
   updateProcedure(procedure: Procedure): Observable<Procedure> {
     return this.http.post<Procedure>(`http://localhost:8080/procedures/update`, procedure);
   }
+
 }

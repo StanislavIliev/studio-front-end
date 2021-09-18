@@ -4,7 +4,7 @@ import {Product} from '../../../models/product';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
-import { updateProductStart } from "../state/product.actions";
+import {  updateProductStart } from "../state/product.actions";
 import { Subscription } from 'rxjs';
 import { getProductById } from '../state/product.selector';
 
@@ -77,7 +77,6 @@ export class ProductUpdateComponent implements OnInit , OnDestroy {
     };
 
     this.store.dispatch(updateProductStart({ product }));
-    this.router.navigate(['/product-all']);
 }
 
   ngOnDestroy() {

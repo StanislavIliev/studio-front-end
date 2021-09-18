@@ -66,6 +66,7 @@ updateProduct$ = createEffect(() => {
   (ofType(updateProductStart),
   switchMap((action) => {
     return this.productService.updateProduct(action.product).pipe(map((data) => {
+      this.router.navigate(['/product-all']);
      return updateProductSuccess({ product: action.product });
     })
     );

@@ -63,6 +63,7 @@ updateProcedure$ = createEffect(() => {
   (ofType(updateProcedureStart),
   switchMap((action) => {
     return this.procedureService.updateProcedure(action.procedure).pipe(map((data) => {
+      this.router.navigate(['/procedure-all']);
      return updateProcedureSuccess({ procedure: action.procedure });
     })
     );
@@ -83,6 +84,7 @@ updateProcedure$ = createEffect(() => {
     })
   );
 });
+
 
 
 }

@@ -3,6 +3,8 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {User} from '../../models/user';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-user-update',
@@ -17,6 +19,7 @@ export class UserUpdateComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
+    private store: Store<AppState>
   ) {
     this.user = JSON.parse(localStorage.getItem('user'));
   }

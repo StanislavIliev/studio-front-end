@@ -7,6 +7,9 @@ import { StoreModule } from "@ngrx/store";
 import { ProcedureComponent } from  './procedure/procedure.component';
 import { ProcedureAllComponent } from  './procedure-all/procedure-all.component';
 import { ProcedureUpdateComponent } from  './procedure-update/procedure-update.component';
+import { ProcedureEffects } from "./state/procedure.effects";
+import { procedureReducer } from "./state/procedure.reducer";
+import { PROCEDURE_STATE_NAME } from "./state/procedure.selector";
 
 const routes: Routes = [
     {path: 'procedure', component: ProcedureComponent},
@@ -26,8 +29,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-   // StoreModule.forFeature(PRODUCT_STATE_NAME, productReducer),
-   // EffectsModule.forFeature([ProductEffects]),
+    StoreModule.forFeature(PROCEDURE_STATE_NAME, procedureReducer),
+    EffectsModule.forFeature([ProcedureEffects]),
   ]
 })
 export class ProcedureModule{

@@ -34,12 +34,11 @@ export class ProcedureComponent implements OnInit {
       price: new FormControl(null),
       name: new FormControl(null),
       date: new FormControl(null, [ Validators.required]),
-      // user: new FormControl(this.user)
+      user: new FormControl(this.user)
     });
   }
 
-  addProcedure(): any {
-    
+  addProcedure(): any { 
       const newProcedure: Procedure = {...this.addProcedureForm.value};
       console.log(newProcedure);
       this.store.dispatch(addProcedureStart({ newProcedure }));

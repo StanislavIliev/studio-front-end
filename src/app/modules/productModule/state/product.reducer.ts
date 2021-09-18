@@ -13,16 +13,16 @@ const _productReducer = createReducer(
 //     product
 //   ],
 // };
-// }), 
-on(updateProductSuccess, (state, action) => {
-      const updatedProducts = state.products.map((product)=>{
-        return action.product.id === product.id ? action.product : product;
-      });
-    return {
-      ...state,
-      products: updatedProducts,
-  };
-  }), 
+// // }), 
+// on(updateProductSuccess, (state, action) => {
+//       const updatedProducts = state.products.map((product)=>{
+//         return action.product.id === product.id ? action.product : product;
+//       });
+//     return {
+//       ...state,
+//       products: updatedProducts,
+//   };
+//   }), 
   on(allProductsSuccess, (state, action) => {
   return {
     ...state,

@@ -4,11 +4,11 @@ export class Procedure {
   name?: string;
   description?: string;
   price?: number;
-  date?: string;
+  date?: Date;
 
   constructor() {
     this.name = '',
-      this.description = '';
+    this.description = '';
     this.price = null;
     this.date = null;
   }

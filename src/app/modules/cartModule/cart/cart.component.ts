@@ -16,7 +16,7 @@ import {Procedure} from '../../../models/procedure';
 export class CartComponent implements OnInit {
 
    user: User = JSON.parse(localStorage.getItem('user'));
-   cart: Cart = new Cart();
+   cart: Cart;
 
    constructor(private cartService: CartService,
                private authService: AuthService,

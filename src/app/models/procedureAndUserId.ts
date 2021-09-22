@@ -1,11 +1,5 @@
-
-export class ProcedureAndUserId {
+export interface ProcedureAndUserId {
   procedureId?: string;
   userId?: string;
-
-  constructor() {
-    this.procedureId = null,
-      this.userId = '';
-  }
 
 }

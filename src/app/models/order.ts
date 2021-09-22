@@ -1,6 +1,6 @@
 import {User} from './user';
 
-export class Order {
+export interface Order {
   id?: string;
   description?: string;
   price?: number;
@@ -8,11 +8,4 @@ export class Order {
   product?: string;
   username?: User;
 
-  constructor(){
-        this.description = '',
-        this.price = null,
-        this.procedure = '',
-        this.product = '',
-        this.username = null;
-  }
 }

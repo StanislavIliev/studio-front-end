@@ -55,3 +55,11 @@ export const USER_UPDATE_FAIL = '[auth] update user fail';
 export const userUpdateStart = createAction(USER_UPDATE_START , props<{ updatedUser : User }>());
 export const userUpdateSuccess = createAction(USER_UPDATE_SUCCESS , props<{ message:string , updatedUser : User }>());;
 export const userUpdateFail = createAction(USER_UPDATE_FAIL , props<{ message : string }>());;
+
+export const GET_ALL_USERS_START = '[user] get all users start';
+export const GET_ALL_USERS_SUCCESS = '[user] get all users success';
+export const GET_ALL_USERS_FAIL = '[user] get all users fail';
+
+export const getAllUsersStart = createAction(GET_ALL_USERS_START);
+export const getAllUsersSuccess = createAction(GET_ALL_USERS_SUCCESS, props<{users: User[] }>());
+export const getAllUsersFail = createAction(GET_ALL_USERS_FAIL, props<{message: string}>());

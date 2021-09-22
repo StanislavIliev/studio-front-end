@@ -103,8 +103,7 @@ export class AuthService {
     const expirationDate = new Date(
       new Date().getTime() + +data.expiresIn * 1000
     );
-    const user = new User(
-    );
+    let user: User;
     user.id = data.localId;
     user.username = data.username;
     return user;
@@ -152,10 +151,20 @@ export class AuthService {
     return this.token;
   }
 
+  getUserByUsername(username: string): Observable<User> {
+    return this.http.post<User>(`http://localhost:8080/users/getUser`, username);
+  }
+
   public updateUser(user: User): Observable<User> {
     return this.http.post<User>(`http://localhost:8080/users/update`, user);
   }
 
+    
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`http://localhost:8080/users/all/{all.json}`);
+  }
+
+  
 
   public isUserLoggedIn(): boolean {
     this.loadToken();
@@ -176,6 +185,7 @@ export class AuthService {
     return this.http.post(`http://localhost:8080/users/req-reset-password`, email);
   }
 
+
   setNewPassword(formData: FormData): Observable<any> {
     return this.http.post(`http://localhost:8080/users/reset-password`, formData);
   }
@@ -184,7 +194,7 @@ export class AuthService {
     console.log(error);
   }
 
-  public validPasswordToken(): string {
+  validPasswordToken(): string {
     return this.token;
   }
 }

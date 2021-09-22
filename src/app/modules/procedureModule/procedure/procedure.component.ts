@@ -18,7 +18,7 @@ import { addProcedureStart } from '../state/procedure.actions';
 export class ProcedureComponent implements OnInit {
 
   addProcedureForm: FormGroup;
-  procedure: Procedure = new Procedure();
+  procedure: Procedure;
   user: User = JSON.parse(localStorage.getItem('user'));
   startDate = new Date(2021, 2, 9);
   endDate = new Date(2021, 2, 16, 0, 0, 0, 0);

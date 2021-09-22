@@ -1,8 +1,8 @@
 import { Component, OnInit ,OnDestroy } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {Procedure} from '../../../models/procedure';
 import {User} from '../../../models/user';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AppState } from 'src/app/store/app.state';
 import { Store } from '@ngrx/store';
@@ -17,13 +17,12 @@ import { updateProcedureStart } from '../state/procedure.actions';
 export class ProcedureUpdateComponent implements OnInit, OnDestroy {
 
   updateProcedureForm: FormGroup;
-  procedure: Procedure = new Procedure();
+  procedure: Procedure;
   user: User = JSON.parse(localStorage.getItem('user'));
   procedureSubscription: Subscription;
 
 
   constructor(
-    private router: Router,
     private r: ActivatedRoute,
     private store: Store<AppState>
   ) {
@@ -81,7 +80,6 @@ export class ProcedureUpdateComponent implements OnInit, OnDestroy {
     };
 
     this.store.dispatch(updateProcedureStart({ procedure }));
-    this.router.navigate(['/procedure-all']);
 }
 
   ngOnDestroy() {

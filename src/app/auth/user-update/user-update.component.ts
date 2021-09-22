@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {User} from '../../models/user';
-import {Router} from '@angular/router';
-import {AuthService} from '../../services/auth.service';
-import { Store } from '@ngrx/store';
+import { User } from '../../models/user';
+import {  Store, ActionsSubject } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
+import { GET_ALL_USERS_SUCCESS, userUpdateStart } from '../state/auth.actions';
+import { AuthService } from 'src/app/services/auth.service';
+import { ofType } from '@ngrx/effects';
 
 @Component({
   selector: 'app-user-update',
@@ -14,36 +15,56 @@ import { AppState } from 'src/app/store/app.state';
 export class UserUpdateComponent implements OnInit {
 
   updateUserForm: FormGroup;
-  user: User = new User();
+  updatedUser: User;
+  username: string;
+  allUsers: User[] = [];
+
 
   constructor(
-    private router: Router,
+    private store: Store<AppState>,
     private authService: AuthService,
-    private store: Store<AppState>
+    private actionsListener$: ActionsSubject
+
   ) {
-    this.user = JSON.parse(localStorage.getItem('user'));
   }
 
   ngOnInit(): void {
-    this.updateUserForm = new FormGroup({
-      username: new FormControl(this.user.username),
-      firstName: new FormControl(this.user.firstName),
-      lastName: new FormControl(this.user.lastName),
-      phoneNumber: new FormControl(this.user.phoneNumber)
-    });
-  }
 
-
-  onUpdateUser(): void {
-    this.user = {...this.updateUserForm.value};
-    this.authService.updateUser(this.user)
-      .subscribe((response) => {
-        this.authService.addUserToLocalCache(response);
-
-        this.router.navigate(['/']);
+    this.actionsListener$
+      .pipe(ofType(GET_ALL_USERS_SUCCESS))
+      .subscribe((data: any) => {
+        this.allUsers = data.users;
+        this.getLoggedUser();
       });
 
   }
 
+
+  getLoggedUser(){
+    this.username = sessionStorage.getItem('username');
+    console.log(this.username);
+    this.updatedUser = this.allUsers.find(user => user.username === this.username);
+    this.updateUsersForm();
+
 }
 
+updateUsersForm(){
+     this.updateUserForm = new FormGroup({
+      username: new FormControl(''),
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
+      phoneNumber: new FormControl('')
+    });
+
+  }
+  
+  onUpdateUser(): any {
+    if (!this.updateUserForm.valid) {
+      return;
+    }
+
+     let updatedUser: User = { ...this.updateUserForm.value };
+  // this.store.dispatch(userUpdateStart({ updatedUser : User }));
+}
+
+}

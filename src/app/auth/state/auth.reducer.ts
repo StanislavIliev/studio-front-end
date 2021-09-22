@@ -16,6 +16,7 @@ const _authReducer = createReducer(
   return {
     ...state,
     isLogged: true,
+    user : action.user
 };
 }),
 on(loginFail, (state, action) => {
@@ -28,11 +29,13 @@ on(registerSuccess, (state, action) => {
   return {
     ...state,
     user: action.user,
+    isLogged: false
   };
 }),
 on( authLogout, (state) => {
   return {
     ...state,
+    user: null, 
     isLogged: false
   }
 }),

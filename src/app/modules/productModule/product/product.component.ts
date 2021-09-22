@@ -15,7 +15,7 @@ import { addProductStart } from '../state/product.actions';
 export class ProductComponent implements OnInit {
 
   addProductForm: FormGroup;
-  product: Product = new Product();
+  product: Product;
   user: User = JSON.parse(localStorage.getItem('user'));
 
   constructor(

@@ -80,7 +80,6 @@ updateProduct$ = createEffect(() => {
     switchMap((action) => {
       return this.productService.deleteProductById(action.id).pipe(
         map((data) => {
-          this.router.navigate(['/product-all']);
           return deleteProductSuccess({ id: action.id });
         })
       );
@@ -90,3 +89,7 @@ updateProduct$ = createEffect(() => {
 
 
 }
+
+
+
+

@@ -1,5 +1,5 @@
 import { Component, OnInit , OnDestroy} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup  } from '@angular/forms';
 import {Product} from '../../../models/product';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Store } from '@ngrx/store';

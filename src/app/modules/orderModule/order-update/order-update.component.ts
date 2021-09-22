@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
 export class OrderUpdateComponent implements OnInit {
 
   updateOrderForm: FormGroup;
-  order: Order = new Order();
+  order: Order;
   user: User = JSON.parse(localStorage.getItem('user'));
 
   constructor(

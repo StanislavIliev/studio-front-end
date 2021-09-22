@@ -1,10 +1,5 @@
-
-export class ProductAndUserId {
+export interface ProductAndUserId {
   productId?: string;
   userId?: string;
 
-  constructor() {
-      this.productId = null,
-      this.userId = '';
-  }
 }

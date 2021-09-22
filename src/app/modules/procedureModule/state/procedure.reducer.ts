@@ -15,15 +15,15 @@ const _procedureReducer = createReducer(
 //   ],
 // };
 // }), 
-on(updateProcedureSuccess, (state, action) => {
-      const updatedProcedures = state.procedures.map((procedure)=>{
-        return action.procedure.id === procedure.id ? action.procedure : procedure;
-      });
-    return {
-      ...state,
-      procedures: updatedProcedures,
-  };
-  }), 
+// on(updateProcedureSuccess, (state, action) => {
+//       const updatedProcedures = state.procedures.map((procedure)=>{
+//         return action.procedure.id === procedure.id ? action.procedure : procedure;
+//       });
+//     return {
+//       ...state,
+//       procedures: updatedProcedures,
+//   };
+//   }), 
   on(allProceduresSuccess, (state, action) => {
   return {
     ...state,

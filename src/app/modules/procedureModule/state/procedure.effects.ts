@@ -18,7 +18,7 @@ export class ProcedureEffects{
     ){}
 
 
-allProducts$ = createEffect(() => {
+allProcedures$ = createEffect(() => {
   return this.actions$.pipe(
     ofType(allProceduresStart),
     exhaustMap(() => {

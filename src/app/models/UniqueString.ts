@@ -1,3 +1,3 @@
-export class UniqueString{
+export interface UniqueString{
  id?: string;
 }

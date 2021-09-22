@@ -18,7 +18,7 @@ import { registerStart } from '../state/auth.actions';
 export class RegisterComponent implements OnInit {
    
   registerForm: FormGroup;
-  user: User = new User();
+  user: User;
 
   constructor(
         private store: Store<AppState>

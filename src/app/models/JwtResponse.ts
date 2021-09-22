@@ -1,4 +1,4 @@
-export class JwtResponse {
+export interface JwtResponse {
   token: string;
   type: string;
   account: string;

@@ -15,45 +15,38 @@ import { ofType } from '@ngrx/effects';
 export class UserUpdateComponent implements OnInit {
 
   updateUserForm: FormGroup;
-  updatedUser: User;
-  username: string;
-  allUsers: User[] = [];
+  updatingUser: User;
+  id: string;
 
 
   constructor(
     private store: Store<AppState>,
-    private authService: AuthService,
-    private actionsListener$: ActionsSubject
-
-  ) {
+    private authService: AuthService
+      ) {
   }
 
   ngOnInit(): void {
-
-    this.actionsListener$
-      .pipe(ofType(GET_ALL_USERS_SUCCESS))
-      .subscribe((data: any) => {
-        this.allUsers = data.users;
-        this.getLoggedUser();
-      });
+       this.getLoggedUser();
+        this.updateUsersForm();
 
   }
 
 
   getLoggedUser(){
-    this.username = sessionStorage.getItem('username');
-    console.log(this.username);
-    this.updatedUser = this.allUsers.find(user => user.username === this.username);
-    this.updateUsersForm();
+   const userDataString = localStorage.getItem('userData'); 
+        this.updatingUser = JSON.parse(userDataString);
+//        console.log(this.updatedUser);
+        return this.updatingUser;
 
 }
 
 updateUsersForm(){
      this.updateUserForm = new FormGroup({
-      username: new FormControl(''),
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      phoneNumber: new FormControl('')
+       username : new FormControl(this.updatingUser.username),
+       id: new FormControl(this.updatingUser.id),
+      firstName: new FormControl(this.updatingUser.firstName),
+      lastName: new FormControl(this.updatingUser.lastName),
+      phoneNumber: new FormControl(this.updatingUser.phoneNumber)
     });
 
   }
@@ -63,8 +56,21 @@ updateUsersForm(){
       return;
     }
 
-     let updatedUser: User = { ...this.updateUserForm.value };
-  // this.store.dispatch(userUpdateStart({ updatedUser : User }));
+    const firstName = this.updateUserForm.value.firstName;
+    const lastName = this.updateUserForm.value.lastName;
+    const phoneNumber = this.updateUserForm.value.phoneNumber;
+
+    const updatedUser: User = {
+      id: this.updatingUser.id,
+      username: this.updatingUser.username,
+      firstName,
+      lastName,
+      phoneNumber
+    };
+    
+   // let updatedUser: User = { ...this.updateUserForm.value };
+    console.log(updatedUser);
+   this.store.dispatch(userUpdateStart({ updatedUser }));
 }
 
 }

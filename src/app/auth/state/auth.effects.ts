@@ -34,6 +34,7 @@ export class AuthEffects{
           return this.authService.login(action.auth).pipe(
             map((data) => {
               sessionStorage.setItem('userToken', data.userToken);
+              localStorage.setItem('userData', JSON.stringify(data));
               sessionStorage.setItem('username', data.username);
               this.notifier.notify('success','Successfully logged in!');
               this.router.navigate(['/']);
@@ -52,32 +53,6 @@ export class AuthEffects{
       );
     });
   
-    
-  getAllUsers$ = createEffect(() => {
-      return this.actions$.pipe(
-        ofType(getAllUsersStart),
-        exhaustMap(() => {
-          return this.authService.getAllUsers().pipe(
-            map((response: User[]) => {
-              let allusers: User[] = [];
-              allusers = Object.keys(response)
-                .map(key => {
-                  let newProduct = response[key];
-                  newProduct["userId"] = key;
-                  return response[key];
-                })
-              return getAllUsersSuccess({
-                users: allusers
-              });
-            })
-          );
-        }),
-        catchError(() => {
-          return EMPTY;
-        })
-      );
-    });
-
 
     auto_login$ = createEffect(() => {
       return this.actions$.pipe(
@@ -128,6 +103,7 @@ updateUser$ = createEffect(() => {
   switchMap((action) => {
     return this.authService.updateUser(action.updatedUser).pipe(map((data) => {
       this.router.navigate(['/']);
+      localStorage.setItem('userData', JSON.stringify(data));
      return userUpdateSuccess({ message: 'Success' , updatedUser: action.updatedUser });
     })
     );

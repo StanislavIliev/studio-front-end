@@ -155,16 +155,13 @@ export class AuthService {
     return this.http.post<User>(`http://localhost:8080/users/getUser`, username);
   }
 
-  public updateUser(user: User): Observable<User> {
+  findUserById(id: string): any{
+    return this.http.get<any>(`http://localhost:8080/users/{id}`);
+  }
+
+   updateUser(user: User): Observable<User> {
     return this.http.post<User>(`http://localhost:8080/users/update`, user);
   }
-
-    
-  getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`http://localhost:8080/users/all/{all.json}`);
-  }
-
-  
 
   public isUserLoggedIn(): boolean {
     this.loadToken();

@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators} from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AuthResponse } from 'src/app/models/auth.responsible';
 import { AppState } from 'src/app/store/app.state';
-import {User} from '../../models/user';
-import {AuthService} from '../../services/auth.service';
+import { User } from '../../models/user';
 import { registerStart } from '../state/auth.actions';
 
 
@@ -22,8 +19,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
         private store: Store<AppState>
-        ) 
-        {}
+   ){
+ }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -37,12 +34,8 @@ export class RegisterComponent implements OnInit {
     });
    }
   
-
-
   onRegister(){
-    
     const user: User = { ...this.registerForm.value };
-
     this.store.dispatch(registerStart({ user: user }));
   }
   

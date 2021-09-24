@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
-import {AuthService} from '../../../services/auth.service';
-import {Product} from '../../../models/product';
-import {ProductService} from '../../../services/productService';
-import {User} from '../../../models/user';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
+import { Product } from '../../../models/product';
+import { ProductService } from '../../../services/productService';
+import { User } from '../../../models/user';
 import { Store , ActionsSubject } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { Observable } from 'rxjs';
@@ -20,7 +20,6 @@ export class ProductAllComponent implements OnInit {
 
   products: Observable<Product[]>;
   user: User = JSON.parse(localStorage.getItem('user'));
-
 
   constructor(
     private router: Router,

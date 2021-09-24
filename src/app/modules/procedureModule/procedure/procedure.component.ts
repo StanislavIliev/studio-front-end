@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Procedure} from '../../../models/procedure';
-import {User} from '../../../models/user';
-import {Router} from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Procedure } from '../../../models/procedure';
+import { User } from '../../../models/user';
 import { ProcedureService } from '../../../services/procedureService';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { addProcedureStart } from '../state/procedure.actions';
-
-
 
 @Component({
   selector: 'app-procedure',
@@ -19,11 +16,9 @@ export class ProcedureComponent implements OnInit {
 
   addProcedureForm: FormGroup;
   procedure: Procedure;
-  user: User = JSON.parse(localStorage.getItem('user'));
-  startDate = new Date(2021, 2, 9);
-  endDate = new Date(2021, 2, 16, 0, 0, 0, 0);
+  user: User = JSON.parse(localStorage.getItem('userData'));
+
   constructor(
-    private router: Router,
     private procedureService: ProcedureService,
     private store: Store<AppState>
   ) { }
@@ -31,9 +26,9 @@ export class ProcedureComponent implements OnInit {
   ngOnInit(): void {
     this.addProcedureForm = new FormGroup({
       description: new FormControl('' , [Validators.required, Validators.pattern('[A-Za-z0-9 ]+')]),
-      price: new FormControl(null),
-      name: new FormControl(null),
-      date: new FormControl(null, [ Validators.required]),
+      price: new FormControl('', [Validators.required, Validators.pattern('[0-9]+')]),
+      name: new FormControl('', [Validators.required, Validators.pattern('[A-Za-z0-9 ]+')]),
+      date: new FormControl('', [ Validators.required]),
       user: new FormControl(this.user)
     });
   }
@@ -42,8 +37,6 @@ export class ProcedureComponent implements OnInit {
       const newProcedure: Procedure = {...this.addProcedureForm.value};
       console.log(newProcedure);
       this.store.dispatch(addProcedureStart({ newProcedure }));
-      // this.actions$.pipe(ofType(addProcedureStart)).subscribe((response) => {})
-  
   }
 
   getOrderById(orderId: string): void{
@@ -52,5 +45,4 @@ export class ProcedureComponent implements OnInit {
         this.procedure = response;
       });
   }
-
 }

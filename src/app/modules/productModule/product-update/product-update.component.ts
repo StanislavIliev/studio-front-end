@@ -1,7 +1,7 @@
 import { Component, OnInit , OnDestroy} from '@angular/core';
 import { FormControl, FormGroup , Validators } from '@angular/forms';
 import { Product } from '../../../models/product';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { updateProductStart } from "../state/product.actions";
@@ -20,7 +20,6 @@ export class ProductUpdateComponent implements OnInit , OnDestroy {
   productSubscription: Subscription;
 
   constructor(
-    private router: Router,
     private r: ActivatedRoute,
     private store: Store<AppState>
   ) {

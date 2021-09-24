@@ -45,8 +45,8 @@ export class ProcedureUpdateComponent implements OnInit, OnDestroy {
       id: new FormControl(this.procedure.id),
       description: new FormControl(this.procedure.description, [Validators.required, Validators.pattern('[A-Za-z0-9 ]+')]),
       price: new FormControl(this.procedure.price, [Validators.required, Validators.pattern('[0-9]+')]),
-      name: new FormControl(this.procedure.name, [Validators.required, Validators.pattern('[A-Za-z0-9 ]+')]),
-      date: new FormControl(this.procedure.date, [Validators.required])
+      name: new FormControl(this.procedure.name, [Validators.required, Validators.pattern('[A-Za-z_]+')]),
+      date: new FormControl(this.procedure.date)
     });
 
   }

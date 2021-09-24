@@ -36,7 +36,7 @@
                       <option value="FILE">FILE</option>
                     </select>
                   </div>
-                  <button type="submit" class="btn btn-primary btn-lg">Update</button>
+                  <button type="submit" [disabled]="!updateProductForm.valid" class="btn btn-primary btn-lg">Update</button>
                 </div>
               </form>
             </div>

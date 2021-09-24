@@ -39,7 +39,7 @@
                            class="alert alert-danger form-text text-center">Incorrect phone number!</small>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg">Update</button>
+                <button type="submit" [disabled]="!updateUserForm.valid" class="btn btn-primary btn-lg">Update</button>
               </form>
             </div>
           </div>

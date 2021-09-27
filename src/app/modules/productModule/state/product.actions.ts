@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { Product } from "src/app/models/product";
-
+import { ProductAndUserId } from '../../../models/productAndUserId';
 
 export const ADD_PRODUCT_START = '[user] add product start';
 export const ADD_PRODUCT_SUCCESS = '[user] add product success';
@@ -34,5 +34,13 @@ export const DELETE_PRODUCT_FAIL = '[user] delete product fail';
 export const deleteProductStart = createAction(DELETE_PRODUCT_START, props<{ id: string}>());
 export const deleteProductSuccess = createAction(DELETE_PRODUCT_SUCCESS, props<{ id: string}>());
 export const deleteProductFail = createAction(DELETE_PRODUCT_FAIL, props<{message: string}>());
+
+export const ADD_TO_CART_PRODUCT_START = '[user] add to cart product start';
+export const ADD_TO_CART_PRODUCT_SUCCESS = '[user] add to cart product success';
+export const ADD_TO_CART_PRODUCT_FAIL = '[user] add to cart product fail';
+
+export const addProductToCartStart = createAction(ADD_TO_CART_PRODUCT_START, props<{ productAndUserId: ProductAndUserId }>());
+export const addProductToCartSuccess = createAction(ADD_TO_CART_PRODUCT_SUCCESS, props<{ product: ProductAndUserId , message: string}>());
+export const addProductToCartFail = createAction(ADD_TO_CART_PRODUCT_FAIL, props<{message: string}>());
 
 export const dummyAction = createAction('[dummy action]');

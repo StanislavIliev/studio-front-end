@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
 import { Product } from '../../../models/product';
-import { ProductService } from '../../../services/productService';
 import { User } from '../../../models/user';
 import { Store , ActionsSubject } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { Observable } from 'rxjs';
-import { allProductsStart, ALL_PRODUCTS_SUCCESS , deleteProductStart } from '../state/product.actions';
+import { addProductToCartStart, allProductsStart, ALL_PRODUCTS_SUCCESS , deleteProductStart } from '../state/product.actions';
 import { ofType } from '@ngrx/effects';
  
 
@@ -19,16 +16,13 @@ import { ofType } from '@ngrx/effects';
 export class ProductAllComponent implements OnInit {
 
   products: Observable<Product[]>;
-  user: User = JSON.parse(localStorage.getItem('user'));
-
+  loggedUser :User;
   constructor(
-    private router: Router,
     private store: Store<AppState>,
-    private authService: AuthService,
-    private productService: ProductService,
     private actionListener: ActionsSubject
     ) {
       this.store.dispatch(allProductsStart());
+      this.getLoggedUser();
      }
 
     ngOnInit(): void {
@@ -43,14 +37,19 @@ export class ProductAllComponent implements OnInit {
       }
     }
   
-
   addProductToCart(product: Product): void{
     const productAndUserId = {
-      userId:  this.authService.getUserIdFromLocalCache(),
+      userId:  this.loggedUser.id,
       productId: product.id
     };
-    this.productService.addProductToCart(productAndUserId).
-      subscribe((resp) => {console.log(resp); });
-    this.router.navigate(['/product-all']);
+
+    console.log(productAndUserId);
+    this.store.dispatch(addProductToCartStart({ productAndUserId }));
+  }
+
+  getLoggedUser(){
+    const userDataString = localStorage.getItem('userData'); 
+    this.loggedUser = JSON.parse(userDataString);
+    return this.loggedUser;
   }
 }

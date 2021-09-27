@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
 import {Procedure} from '../../../models/procedure';
-import {ProcedureService} from '../../../services/procedureService';
 import {AuthService} from '../../../services/auth.service';
 import { ofType } from '@ngrx/effects';
-import { allProceduresStart, ALL_PROCEDURES_SUCCESS, deleteProcedureStart } from '../state/procedure.actions';
+import { allProceduresStart, ALL_PROCEDURES_SUCCESS,
+   deleteProcedureStart ,addProcedureToCartStart} from '../state/procedure.actions';
 import { Store,ActionsSubject } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
- 
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -18,15 +17,15 @@ import { AppState } from 'src/app/store/app.state';
 export class ProcedureAllComponent implements OnInit {
 
   procedures: Procedure[] =  [];
+  loggedUser: User;
 
   constructor(
-    private router: Router,
     private authService: AuthService,
-    private procedureService: ProcedureService,
     private actionListener: ActionsSubject,
     private store: Store<AppState>
     ) { 
       this.store.dispatch(allProceduresStart());
+      this.getLoggedUser();
     }
 
   ngOnInit(): void {      
@@ -43,11 +42,17 @@ export class ProcedureAllComponent implements OnInit {
 
   addProcedureToCart(procedure: Procedure): void{
     const procedureAndUserId = {
-      userId:  this.authService.getUserIdFromLocalCache(),
+      userId:  this.loggedUser.id,
       procedureId: procedure.id
     };
-    this.procedureService.addProcedureToCart(procedureAndUserId).
-    subscribe((resp) => {console.log(resp); });
-    this.router.navigate(['/procedure-all']);
+
+    console.log(procedureAndUserId);
+    this.store.dispatch(addProcedureToCartStart({ procedureAndUserId }));
+  }
+
+  getLoggedUser(){
+    const userDataString = localStorage.getItem('userData'); 
+    this.loggedUser = JSON.parse(userDataString);
+    return this.loggedUser;
   }
 }

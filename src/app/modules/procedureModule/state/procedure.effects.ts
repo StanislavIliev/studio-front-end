@@ -6,7 +6,8 @@ import { EMPTY } from "rxjs";
 import { ProcedureService } from "src/app/services/procedureService";
 import { Procedure } from "src/app/models/procedure";
 import { allProceduresStart ,allProceduresSuccess ,addProcedureStart ,addProcedureSuccess ,
-updateProcedureStart , updateProcedureSuccess ,deleteProcedureStart , deleteProcedureSuccess} from "./procedure.actions";
+updateProcedureStart , updateProcedureSuccess ,deleteProcedureStart , deleteProcedureSuccess,
+addProcedureToCartStart ,addProcedureToCartSuccess } from "./procedure.actions";
 
 
 @Injectable()
@@ -57,6 +58,20 @@ addProcedure$ = createEffect(() => {
  })
  );
 });
+
+addProcedureToCart$ = createEffect(() => {
+  return this.actions$.pipe
+  (ofType(addProcedureToCartStart),
+  exhaustMap((action) => {
+    return this.procedureService.addProcedureToCart(action.procedureAndUserId).pipe(map((data) => {
+     this.router.navigate(['/procedure-all']); 
+     return addProcedureToCartSuccess({ procedure :data , message: 'Success'});
+    })
+    );
+  })
+  );
+ });
+ 
 
 updateProcedure$ = createEffect(() => {
   return this.actions$.pipe

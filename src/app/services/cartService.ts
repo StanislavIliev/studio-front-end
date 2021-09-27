@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {ProductAndUserId} from '../models/productAndUserId';
-import {Observable} from 'rxjs';
-import {Cart} from '../models/cart';
-import {ProcedureAndUserId} from '../models/procedureAndUserId';
-
+import { Observable } from 'rxjs';
+import { Cart } from '../models/cart';
+import { ItemDeleteAndUserId } from '../models/itemDeleteAndUserId';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -14,20 +13,23 @@ export class CartService {
   constructor(private http: HttpClient) {
   }
 
-  deleteProductFromCart(pui: ProductAndUserId): Observable<any> {
-    return this.http.post('http://localhost:8080/carts/delete', pui);
+  deleteItemFromCart(item: ItemDeleteAndUserId): Observable<any> {
+    return this.http.post('http://localhost:8080/carts/delete', item);
   }
 
-  deleteProcedureFromCart(pui: ProcedureAndUserId): Observable<any> {
-    return this.http.post('http://localhost:8080/carts/delete', pui);
-  }
 
   getSubTotalCart(id: string): Observable<any> {
     return this.http.post('http://localhost:8080/carts/total', id);
   }
 
 
+  emptyCart(user: User): Observable<any> {
+    return this.http.post('http://localhost:8080/carts/deleteAll', user);
+  }
+
+
   getCart(id: string): Observable<Cart> {
     return this.http.get(`http://localhost:8080/carts/${id}`);
   }
+  
 }

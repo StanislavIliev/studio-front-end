@@ -7,7 +7,7 @@ import { AppState } from "src/app/store/app.state";
 import { EMPTY } from "rxjs";
 import { ProductService } from "src/app/services/productService";
 import { addProductStart, addProductSuccess,allProductsStart, allProductsSuccess, deleteProductStart, deleteProductSuccess
-   , updateProductStart, updateProductSuccess , dummyAction } from "./product.actions";
+   , updateProductStart, updateProductSuccess , dummyAction ,addProductToCartStart ,addProductToCartSuccess } from "./product.actions";
 import { Product } from "src/app/models/product";
 
 
@@ -46,7 +46,19 @@ allProducts$ = createEffect(() => {
   );
 });
 
-
+addProductToCart$ = createEffect(() => {
+  return this.actions$.pipe
+  (ofType(addProductToCartStart),
+  exhaustMap((action) => {
+    return this.productService.addProductToCart(action.productAndUserId).pipe(map((data) => {
+     this.router.navigate(['/product-all']); 
+     return addProductToCartSuccess({ product :data , message: 'Success'});
+    })
+    );
+  })
+  );
+ });
+ 
 addProduct$ = createEffect(() => {
  return this.actions$.pipe
  (ofType(addProductStart),

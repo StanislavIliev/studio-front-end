@@ -1,10 +1,9 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {Procedure} from '../models/procedure';
-import {ProcedureAndUserId} from '../models/procedureAndUserId';
-import {Product} from '../models/product';
-import {Order} from '../models/order';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Procedure } from '../models/procedure';
+import { ProcedureAndUserId } from '../models/procedureAndUserId';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +14,8 @@ export class ProcedureService {
 
 
 
-  addProcedureToCart(pui: ProcedureAndUserId): Observable<ProcedureAndUserId>{
-    return this.http.post<ProcedureAndUserId>('http://localhost:8080/carts/add-procedure', pui);
+  addProcedureToCart(procedure: ProcedureAndUserId): Observable<ProcedureAndUserId>{
+    return this.http.post<ProcedureAndUserId>('http://localhost:8080/carts/add-procedure', procedure);
   }
 
   addProcedure(procedure: Procedure): Observable<Procedure> {

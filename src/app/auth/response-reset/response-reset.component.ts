@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AppState } from 'src/app/store/app.state';
 import { Store } from '@ngrx/store';
@@ -14,23 +14,11 @@ import { responsePasswordStart } from '../state/auth.actions';
 export class ResponseResetComponent implements OnInit {
 
   responseResetForm: FormGroup;
-  errorMessage: string;
-  successMessage: string;
-  resetToken: null;
-  CurrentState: any;
-  IsResetFormValid = true;
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private store: Store<AppState>
     ) {
-
-    this.CurrentState = 'Wait';
-    this.route.params.subscribe(params => {
-      this.resetToken = params.token;
-      console.log(this.resetToken);
-    });
   }
 
 
@@ -58,11 +46,9 @@ export class ResponseResetComponent implements OnInit {
 
 
   resetPassword(): any {
-
     const auth: User = {};
     auth.password = this.responseResetForm.value.newPassword;
     auth.uniqueString = this.router.url.split('/').pop();
-    console.log(auth);
     this.store.dispatch(responsePasswordStart({ auth }));
   }
 }

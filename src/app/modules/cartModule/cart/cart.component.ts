@@ -1,12 +1,12 @@
 import { Component, OnInit} from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
-import { Router } from '@angular/router';
 import { CartService } from '../../../services/cartService';
-import {HttpClient} from '@angular/common/http';
 import { Cart } from '../../../models/cart';
-import {Product} from '../../../models/product';
-import {User} from '../../../models/user';
-import {Procedure} from '../../../models/procedure';
+import { Product } from '../../../models/product';
+import { User } from '../../../models/user';
+import { Procedure } from '../../../models/procedure';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.state';
+import { cartLoadStart, deleteProcedureFromCartStart,emptyCartStart,  deleteProductFromCartStart } from '../state/cart.actions';
 
 @Component({
   selector: 'app-cart',
@@ -15,62 +15,39 @@ import {Procedure} from '../../../models/procedure';
 })
 export class CartComponent implements OnInit {
 
-   user: User = JSON.parse(localStorage.getItem('user'));
+   user: User = JSON.parse(localStorage.getItem('userData'));
    cart: Cart;
 
-   constructor(private cartService: CartService,
-               private authService: AuthService,
-               private http: HttpClient,
-               private router: Router) {
-     this.getCartByUserId();
+   constructor(
+      private cartService: CartService,
+      private store: Store<AppState>,
+      ){
+      this.getCartByUserId();
+      this.cart = JSON.parse(localStorage.getItem('cart'));
   }
 
   ngOnInit(): void {
     }
 
   getCartByUserId(): void{
-     const userId = this.user.id;
-     this.cartService.getCart(userId)
-      .subscribe((response) => {
-        this.cart = response;
-        console.log(this.cart);
-      });
-  }
+    const id = this.user.id;
+      this.store.dispatch(cartLoadStart({ id }));
+      
+    }
 
   deleteProcedureFromCart(procedure: Procedure): void {
-    const procedureAndUserId = {
-      userId: this.user.id,
-      itemId: procedure.id
-    };
-    this.cartService.deleteProcedureFromCart(procedureAndUserId)
-      .subscribe((resp) => {
-        console.log(resp);
-      });
-    this.router.navigate(['/cart']);
+    const id = procedure.id;
+    this.store.dispatch(deleteProcedureFromCartStart({ id }));
   }
 
-  deleteProductFromCart(product: Product ): void {
-    const productAndUserId = {
-      userId: this.user.id,
-      itemId: product.id
-    };
-    this.cartService.deleteProductFromCart(productAndUserId)
-      .subscribe((resp) => {
-        console.log(resp);
-      });
-
-    this.router.navigate(['/cart']);
-  }
+  deleteProductFromCart(product: Product): void {
+  const id = product.id;
+  this.store.dispatch(deleteProductFromCartStart({ id }));
+}
 
   emptyCart(): void {
-    const productAndUserId = {
-      userId: this.user.id,
-      itemId: null
-    };
-    this.cartService.deleteProductFromCart(productAndUserId)
-      .subscribe((resp) => {
-        console.log(resp);
-      });
+     const auth =this.user;
+    this.store.dispatch(emptyCartStart({ auth }));
   }
 
   getSubtotal(): any{

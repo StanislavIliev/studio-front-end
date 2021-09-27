@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { Procedure } from "src/app/models/procedure";
-
+import { ProcedureAndUserId } from '../../../models/procedureAndUserId';
 
 export const ADD_PROCEDURE_START = '[user] add procedure start';
 export const ADD_PROCEDURE_SUCCESS = '[user] add procedure success';
@@ -26,6 +26,14 @@ export const updateProcedureStart = createAction(UPDATE_PROCEDURE_START, props<{
 export const updateProcedureSuccess = createAction(UPDATE_PROCEDURE_SUCCESS, props<{procedure: Procedure }>());
 export const updateProcedureFail = createAction(UPDATE_PROCEDURE_FAIL, props<{message: string}>());
 
+
+export const ADD_TO_CART_PROCEDURE_START = '[user] add to cart procedure start';
+export const ADD_TO_CART_PROCEDURE_SUCCESS = '[user] add to cart procedure success';
+export const ADD_TO_CART_PROCEDURE_FAIL = '[user] add to cart procedure fail';
+
+export const addProcedureToCartStart = createAction(ADD_TO_CART_PROCEDURE_START, props<{ procedureAndUserId: ProcedureAndUserId }>());
+export const addProcedureToCartSuccess = createAction(ADD_TO_CART_PROCEDURE_SUCCESS, props<{ procedure: ProcedureAndUserId , message: string}>());
+export const addProcedureToCartFail = createAction(ADD_TO_CART_PROCEDURE_FAIL, props<{message: string}>());
 
 export const DELETE_PROCEDURE_START = '[user] delete procedure start';
 export const DELETE_PROCEDURE_SUCCESS = '[user] delete procedure success';

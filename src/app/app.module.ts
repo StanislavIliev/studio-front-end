@@ -8,12 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { HomePageComponent } from './modules/page/home-page/home-page.component';
 import { ContactComponent } from './modules/page/contact/contact.component';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import { OrderComponent } from './modules/orderModule/order/order.component';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import { OrderUpdateComponent } from './modules/orderModule/order-update/order-update.component';
-import { OrderDetailsComponent } from './modules/orderModule/order-details/order-details.component';
-import { OrdersAllComponent } from './modules/orderModule/orders-all/orders-all.component';
-import { CartComponent } from './modules/cartModule/cart/cart.component';
 import { StoreModule } from '@ngrx/store';
 import { appReducer } from './store/app.state';
 import { EffectsModule } from '@ngrx/effects';
@@ -27,6 +22,8 @@ import { NotifierModule } from 'angular-notifier';
 import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './modules/productModule/product.module';
 import { ProcedureModule } from './modules/procedureModule/procedure.module';
+import { CartModule } from './modules/cartModule/cart.module';
+import { OrderModule } from './modules/orderModule/order.module';
 
 @NgModule({
   declarations: [
@@ -36,11 +33,6 @@ import { ProcedureModule } from './modules/procedureModule/procedure.module';
     HeaderComponent,
     HomePageComponent,
     ContactComponent,
-    OrderComponent,
-    OrderUpdateComponent,
-    OrderDetailsComponent,
-    OrdersAllComponent,
-    CartComponent,
    ],
     imports: [
         BrowserModule,
@@ -55,6 +47,8 @@ import { ProcedureModule } from './modules/procedureModule/procedure.module';
         AuthModule,
         ProductModule,
         ProcedureModule,
+        CartModule,
+        OrderModule,
         NotifierModule.withConfig({
           position: {
             horizontal: {

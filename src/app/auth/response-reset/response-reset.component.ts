@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -20,8 +20,8 @@ export class ResponseResetComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute,
-    private fb: FormBuilder ) {
+    private route: ActivatedRoute
+    ) {
 
     this.CurrentState = 'Wait';
     this.route.params.subscribe(params => {
@@ -47,13 +47,11 @@ export class ResponseResetComponent implements OnInit {
     if (confirm_password.length <= 0) {
       return null;
     }
-
     if (confirm_password !== new_password) {
       return {
         doesNotMatch: true
       };
     }
-
     return null;
   }
 

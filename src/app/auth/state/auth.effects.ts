@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect , ofType } from "@ngrx/effects";
 import { autoLoginStart,autoLoginSuccess,autoLoginFail, authLogout,
    loginStart, loginSuccess, registerStart, registerSuccess, responsePasswordFail, getAllUsersSuccess , 
-     responsePasswordStart, responsePasswordSuccess ,userUpdateStart , userUpdateSuccess, getAllUsersStart} from "./auth.actions";
+   requestPaswordSuccess, requestPaswordStart ,userUpdateStart , userUpdateSuccess, getAllUsersStart} from "./auth.actions";
 import { AuthService } from '../../services/auth.service';
 import { catchError, exhaustMap , map , switchMap , tap} from 'rxjs/operators';
 import { Store } from "@ngrx/store";
@@ -110,7 +110,32 @@ updateUser$ = createEffect(() => {
   })
   );
  });
-    
+
+ requestEmailPassword$ = createEffect(() => {
+  return this.actions$.pipe(
+    ofType(requestPaswordStart),
+    exhaustMap((action) => {
+      return this.authService.requestReset(action.auth).pipe(
+        map((data) => {
+          this.notifier.notify('success','The email has been successfully!');
+          this.router.navigate(['/auth/login']);
+          return requestPaswordSuccess({
+            auth: data,
+            message: 'Successfully.',
+          });
+        })
+      );
+    }),
+    catchError(() => {
+       this.notifier.notify('error','Error occured!');
+      return EMPTY;
+    })
+  );
+});
+
+
+
+
   logout$ = createEffect(
     () => {
       return this.actions$.pipe(

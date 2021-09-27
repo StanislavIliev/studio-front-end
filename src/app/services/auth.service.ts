@@ -178,10 +178,9 @@ export class AuthService {
     }
   }
 
-  requestReset(email: string): Observable<any> {
-    return this.http.post(`http://localhost:8080/users/req-reset-password`, email);
+  requestReset(auth: User): Observable<any> {
+    return this.http.post(`http://localhost:8080/users/req-reset-password`, auth);
   }
-
 
   setNewPassword(formData: FormData): Observable<any> {
     return this.http.post(`http://localhost:8080/users/reset-password`, formData);

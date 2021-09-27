@@ -33,6 +33,23 @@ export class RegisterComponent implements OnInit {
       phoneNumber: new FormControl('' , [Validators.required, Validators.pattern('[+,0-9]+')])
     });
    }
+   
+  validate(form: FormGroup): any {
+    const new_password = form.controls.newPassword.value;
+    const confirm_password = form.controls.confirmPassword.value;
+
+    if (confirm_password.length <= 0) {
+      return null;
+    }
+
+    if (confirm_password !== new_password) {
+      return {
+        doesNotMatch: true
+      };
+    }
+
+    return null;
+  }
   
   onRegister(){
     const user: User = { ...this.registerForm.value };

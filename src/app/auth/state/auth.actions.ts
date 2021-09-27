@@ -38,12 +38,12 @@ export const responsePasswordFail = createAction(RESPONSE_PASSWORDS_FAIL, props<
 
 
 
-export const EMAIL_FORGOTTEN_PASSWORD = '[auth] email forgotten password';
+export const EMAIL_FORGOTTEN_PASSWORD = '[auth] email forgotten password start';
 export const EMAIL_FORGOTTEN_PASSWORD_SUCCESS = '[auth] email forgotten password success';
 export const EMAIL_FORGOTTEN_PASSWORD_FAIL = '[auth] email forgotten password fail';
 
-export const requestPaswordStart = createAction(EMAIL_FORGOTTEN_PASSWORD, props<{requestType: string, email: string}>());
-export const requestPaswordSuccess = createAction(EMAIL_FORGOTTEN_PASSWORD_SUCCESS, props<{message: string}>());
+export const requestPaswordStart = createAction(EMAIL_FORGOTTEN_PASSWORD, props<{auth: User}>());
+export const requestPaswordSuccess = createAction(EMAIL_FORGOTTEN_PASSWORD_SUCCESS, props<{auth: User ,message: string}>());
 export const requestPaswordFail = createAction(EMAIL_FORGOTTEN_PASSWORD_FAIL, props<{message: string}>());
 
 

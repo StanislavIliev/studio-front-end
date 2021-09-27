@@ -13,7 +13,7 @@ const routes: Routes = [
 { path: 'login', component: LoginComponent},
 { path: 'register', component: RegisterComponent},
 { path: 'request-reset', component: RequestResetComponent},
-{ path: 'response-reset', component: ResponseResetComponent},
+{ path: 'response-reset/:id', component: ResponseResetComponent},
 { path: 'user-update', component: UserUpdateComponent}
 ]
 

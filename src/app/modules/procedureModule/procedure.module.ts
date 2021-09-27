@@ -15,7 +15,6 @@ const routes: Routes = [
     {path: 'procedure', component: ProcedureComponent},
     {path: 'procedure-all', component: ProcedureAllComponent},
     {path: 'procedure-update/:id', component: ProcedureUpdateComponent},
-    
   ]
     
 @NgModule({

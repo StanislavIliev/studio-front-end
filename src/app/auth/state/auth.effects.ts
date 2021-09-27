@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect , ofType } from "@ngrx/effects";
 import { autoLoginStart,autoLoginSuccess,autoLoginFail, authLogout,
-   loginStart, loginSuccess, registerStart, registerSuccess, responsePasswordFail, getAllUsersSuccess , 
-   requestPaswordSuccess, requestPaswordStart ,userUpdateStart , userUpdateSuccess, getAllUsersStart} from "./auth.actions";
+   loginStart, loginSuccess, registerStart, registerSuccess, responsePasswordStart , responsePasswordSuccess , 
+   requestPaswordSuccess, requestPaswordStart ,userUpdateStart , userUpdateSuccess } from "./auth.actions";
 import { AuthService } from '../../services/auth.service';
 import { catchError, exhaustMap , map , switchMap , tap} from 'rxjs/operators';
 import { Store } from "@ngrx/store";
@@ -134,7 +134,27 @@ updateUser$ = createEffect(() => {
 });
 
 
-
+resetPassword$ = createEffect(() => {
+  return this.actions$.pipe(
+    ofType(responsePasswordStart),
+    exhaustMap((action) => {
+      return this.authService.resetPassword(action.auth).pipe(
+        map((data) => {
+          this.notifier.notify('success','The password has been changed successfully!');
+          this.router.navigate(['/auth/login']);
+          return responsePasswordSuccess({
+            auth: data,
+            message: 'Successfully.',
+          });
+        })
+      );
+    }),
+    catchError(() => {
+       this.notifier.notify('error','Error occured!');
+      return EMPTY;
+    })
+  );
+});
 
   logout$ = createEffect(
     () => {

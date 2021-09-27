@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/models/user';
+import { AppState } from 'src/app/store/app.state';
+import { Store } from '@ngrx/store';
+import { responsePasswordStart } from '../state/auth.actions';
 
 @Component({
   selector: 'app-response-reset',
@@ -18,9 +21,9 @@ export class ResponseResetComponent implements OnInit {
   IsResetFormValid = true;
 
   constructor(
-    private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store<AppState>
     ) {
 
     this.CurrentState = 'Wait';
@@ -32,12 +35,10 @@ export class ResponseResetComponent implements OnInit {
 
 
    ngOnInit(): any {
-    this.responseResetForm = new FormGroup(
-      {
-        newPassword: new FormControl('', [Validators.required, Validators.minLength(4)]),
-        confirmPassword: new FormControl('', [Validators.required, Validators.minLength(4)])
-      }
-    );
+    this.responseResetForm = new FormGroup({
+        newPassword: new FormControl('', [Validators.required, Validators.minLength(3)]),
+        confirmPassword: new FormControl('', [Validators.required, Validators.minLength(3)])
+      });
   }
 
   validate(form: FormGroup): any {
@@ -57,16 +58,11 @@ export class ResponseResetComponent implements OnInit {
 
 
   resetPassword(): any {
-    const obj = {...this.responseResetForm.value};
-    console.log(obj);
-    const code = this.router.url.split('/').pop();
-    const formData = new FormData();
-    formData.append('password', this.responseResetForm.get('newPassword').value);
-    formData.append('uniqueString', code);
-    this.authService.setNewPassword(formData).
-      subscribe((resp) => {
-      console.log(resp);
-      this.router.navigate(['/login']);
-    });
+
+    const auth: User = {};
+    auth.password = this.responseResetForm.value.newPassword;
+    auth.uniqueString = this.router.url.split('/').pop();
+    console.log(auth);
+    this.store.dispatch(responsePasswordStart({ auth }));
   }
 }

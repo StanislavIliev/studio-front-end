@@ -32,8 +32,8 @@ export const RESPONSE_PASSWORDS_START = '[auth] response password';
 export const RESPONSE_PASSWORDS_SUCCESS = '[auth] response success';
 export const RESPONSE_PASSWORDS_FAIL = '[auth] response fail';
 
-export const responsePasswordStart = createAction(RESPONSE_PASSWORDS_START, props<{requestType: string, email: string}>());
-export const responsePasswordSuccess = createAction(RESPONSE_PASSWORDS_SUCCESS, props<{message: string}>());
+export const responsePasswordStart = createAction(RESPONSE_PASSWORDS_START, props<{auth: User}>());
+export const responsePasswordSuccess = createAction(RESPONSE_PASSWORDS_SUCCESS, props<{auth: User , message: string}>());
 export const responsePasswordFail = createAction(RESPONSE_PASSWORDS_FAIL, props<{message: string}>());
 
 

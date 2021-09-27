@@ -10,7 +10,7 @@ export interface User {
   phoneNumber?: string;
   uniqueString?: string;
   cart?: object;
- expirationDate?: Date;
+  expirationDate?: Date;
   expireDate?: Date;
   userToken?: string;
 

@@ -29,9 +29,9 @@ const _productReducer = createReducer(
     products: action.products,
 };
 }),
-on(deleteProductSuccess, (state, { id }) => {
+on(deleteProductSuccess, (state, action) => {
   const updatedProducts = state.products.filter((product) =>{
-      return product.id !== id;
+      return product.id !== action.id;
   });
 return {
   ...state,

@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { initialState } from "./cart.state";
-import { deleteProcedureFromCartSuccess, deleteProductFromCartSuccess, updateCartSuccess } from './cart.actions';
+import { deleteProcedureFromCartSuccess,emptyCartSuccess , deleteProductFromCartSuccess, cartLoadSuccess ,updateCartSuccess } from './cart.actions';
 
 
 const _cartReducer = createReducer(
@@ -11,24 +11,40 @@ const _cartReducer = createReducer(
     cart: action.message,
 };
 }),
-// on(deleteProcedureFromCartSuccess, (state, { id }) => {
-//   const updatedProcedures = state.procedures.filter((procedure) =>{
-//       return procedure.id !== id;
-//   });
-// return {
-//   ...state,
-//   procedures: updatedProcedures,
-// };
-// }),
-// on(deleteProductFromCartSuccess, (state, { id }) => {
-//   const updatedProducts = state.products.filter((product) =>{
-//       return product.id !== id;
-//   });
-// return {
-//   ...state,
-//   products: updatedProducts,
-// };
-// })
+on(cartLoadSuccess, (state, action) => {
+  return {
+    ...state,
+    procedures: action.cart.procedures,
+    id: action.cart.id,
+    products: action.cart.products,
+};
+}),
+on(deleteProcedureFromCartSuccess, (state, action) => {
+  const updatedProcedures = state.procedures.filter((procedure) =>{
+      return procedure.id !== action.id;
+  });
+return {
+  ...state,
+  procedures: updatedProcedures,
+};
+}),
+on(deleteProductFromCartSuccess, (state,action) => {
+  const updatedProducts = state.products.filter((product) =>{
+      return product.id !== action.id;
+  });
+return {
+  ...state,
+  products: updatedProducts,
+};
+}),
+on(emptyCartSuccess, (state,action) => {
+return {
+  ...state,
+  products: null,
+  id: null,
+  procedures: null
+};
+})
  );
 
 export function cartReducer(state, action) {

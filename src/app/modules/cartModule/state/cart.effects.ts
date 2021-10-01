@@ -3,9 +3,10 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Router } from "@angular/router";
 import { CartService } from "src/app/services/cartService";
 import { cartLoadStart , cartLoadSuccess, deleteProcedureFromCartStart ,deleteProcedureFromCartSuccess ,
-  deleteProductFromCartStart ,emptyCartStart , emptyCartSuccess } from "./cart.actions";
-import { map , switchMap } from 'rxjs/operators';
+  deleteProductFromCartStart ,deleteProductFromCartSuccess ,emptyCartStart , emptyCartSuccess } from "./cart.actions";
+import { map , switchMap ,exhaustMap } from 'rxjs/operators';
 import { User } from '../../../models/user';
+import { Cart } from '../../../models/cart';
 import { ItemDeleteAndUserId } from "src/app/models/itemDeleteAndUserId";
 
 @Injectable()
@@ -16,21 +17,22 @@ export class CartEffects{
     private router: Router
     ){}
 
-
+       
     loadCart$ = createEffect(() => {
       return this.actions$.pipe
       (ofType(cartLoadStart),
-      switchMap((action) => {
+      exhaustMap((action) => {
         return this.cartService.getCart(action.id).pipe(map((data) => {
             console.log(data);
-            localStorage.setItem('cart', JSON.stringify(data));
-            return cartLoadSuccess({ id: data.id ,message: 'Success' });
+            localStorage.setItem('cart', JSON.stringify(data));            
+            return cartLoadSuccess({ cart: data ,message: 'Success' });
         })
         );
       })
       );
      });
 
+     
      deleteProcedureFromCart$ = createEffect(() => {
       return this.actions$.pipe(
         ofType(deleteProcedureFromCartStart),
@@ -42,7 +44,7 @@ export class CartEffects{
           console.log(itemDeleteAndUserId);
           return this.cartService.deleteItemFromCart(itemDeleteAndUserId).pipe(
             map((data) => {
-              this.router.navigate(['/']);
+              this.router.navigate(['/cart']);
               return deleteProcedureFromCartSuccess({ id: data ,message: 'Success' });
             })
           );
@@ -61,8 +63,8 @@ export class CartEffects{
           console.log(itemDeleteAndUserId);
           return this.cartService.deleteItemFromCart(itemDeleteAndUserId).pipe(
             map((data) => {
-              this.router.navigate(['/']);
-              return deleteProcedureFromCartSuccess({ id: data ,message: 'Success' });
+              this.router.navigate(['/cart']);
+              return deleteProductFromCartSuccess({ id: data ,message: 'Success' });
             })
           );
         })
@@ -76,7 +78,7 @@ export class CartEffects{
           const user: User = JSON.parse(localStorage.getItem('userData'));
           return this.cartService.emptyCart(user).pipe(
             map((data) => {
-              this.router.navigate(['/']);
+              this.router.navigate(['/cart']);
               return emptyCartSuccess({ auth: data ,message: 'Success' });
             })
           );

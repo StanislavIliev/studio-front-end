@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Procedure} from '../../../models/procedure';
-import {AuthService} from '../../../services/auth.service';
+import { Procedure } from '../../../models/procedure';
 import { ofType } from '@ngrx/effects';
 import { allProceduresStart, ALL_PROCEDURES_SUCCESS,
    deleteProcedureStart ,addProcedureToCartStart} from '../state/procedure.actions';
@@ -20,7 +19,6 @@ export class ProcedureAllComponent implements OnInit {
   loggedUser: User;
 
   constructor(
-    private authService: AuthService,
     private actionListener: ActionsSubject,
     private store: Store<AppState>
     ) { 
@@ -45,7 +43,6 @@ export class ProcedureAllComponent implements OnInit {
       userId:  this.loggedUser.id,
       procedureId: procedure.id
     };
-
     console.log(procedureAndUserId);
     this.store.dispatch(addProcedureToCartStart({ procedureAndUserId }));
   }

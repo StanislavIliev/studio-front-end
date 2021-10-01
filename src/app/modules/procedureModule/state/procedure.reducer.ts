@@ -30,9 +30,9 @@ const _procedureReducer = createReducer(
     procedures: action.procedures,
 };
 }),
-on(deleteProcedureSuccess, (state, { id }) => {
+on(deleteProcedureSuccess, (state, action) => {
   const updatedProcedures = state.procedures.filter((procedure) =>{
-      return procedure.id !== id;
+      return procedure.id !== action.id;
   });
 return {
   ...state,

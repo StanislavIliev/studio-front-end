@@ -1,3 +1,4 @@
+import { Cart }  from './cart';
 export interface User {
   id?: string;
   username?: string;
@@ -9,7 +10,7 @@ export interface User {
   token?: string;
   phoneNumber?: string;
   uniqueString?: string;
-  cart?: object;
+  cart?: Cart;
   expirationDate?: Date;
   expireDate?: Date;
   userToken?: string;

@@ -7,7 +7,7 @@ export const CART_LOAD_SUCCESS = '[auth] cart load success';
 export const CART_LOAD_FAIL = '[auth] cart load fail';
 
 export const cartLoadStart = createAction(CART_LOAD_START, props<{id: string}>());
-export const cartLoadSuccess = createAction(CART_LOAD_SUCCESS, props<{ id : string , message: string}>());
+export const cartLoadSuccess = createAction(CART_LOAD_SUCCESS, props<{ cart : Cart , message: string}>());
 export const cartLoadFail = createAction(CART_LOAD_FAIL, props<{message: string}>());
 
 export const DELETE_PROCEDURE_FROM_CART_START = '[auth] delete procedure from cart start';

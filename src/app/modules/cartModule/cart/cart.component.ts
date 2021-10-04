@@ -19,7 +19,6 @@ export class CartComponent implements OnInit {
    user: User = JSON.parse(localStorage.getItem('userData'));
    cart: Cart;
    
-
    constructor(
       private cartService: CartService,
       private store: Store<AppState>,
@@ -36,34 +35,46 @@ export class CartComponent implements OnInit {
       this.cart= data.cart;
     });
      this.getCurrentCart();
+     this.getSubtotal();
   }
 
-    getCurrentCart(){
+ getCurrentCart(){
       const cartDataString = localStorage.getItem('cart'); 
       this.cart = JSON.parse(cartDataString);
       console.log(this.cart);
       return this.cart;
     }
     
-  deleteProcedureFromCart(procedure: Procedure): void {
+deleteProcedureFromCart(procedure: Procedure): void {
     const id = procedure.id;
     this.store.dispatch(deleteProcedureFromCartStart({ id }));
   }
 
-  deleteProductFromCart(product: Product): void {
+deleteProductFromCart(product: Product): void {
   const id = product.id;
   this.store.dispatch(deleteProductFromCartStart({ id }));
 }
 
-  emptyCart(): void {
+emptyCart(): void {
      const auth =this.user;
     this.store.dispatch(emptyCartStart({ auth }));
   }
 
-  getSubtotal(): any{
-    this.cartService.getSubTotalCart(this.user.id)
-      .subscribe((resp) => {
-        console.log(resp);
+getSubtotal(): any{
+       var total = 0;
+       this.cart.products.forEach(element => {
+         total += element.price;
+       });
+       this.cart.procedures.forEach(element => {
+        total += element.price;
       });
+     console.log(total);
+    return total;
   }
-  }
+
+  placeOrder(): void {
+    const auth =this.user;
+   this.store.dispatch(emptyCartStart({ auth }));
+ }
+
+}

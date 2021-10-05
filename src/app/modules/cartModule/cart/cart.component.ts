@@ -6,7 +6,8 @@ import { User } from '../../../models/user';
 import { Procedure } from '../../../models/procedure';
 import { Store ,ActionsSubject } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
-import { cartLoadStart,CART_LOAD_SUCCESS, deleteProcedureFromCartStart,emptyCartStart,  deleteProductFromCartStart } from '../state/cart.actions';
+import { cartLoadStart,CART_LOAD_SUCCESS,cartPlaceOrderStart,
+   deleteProcedureFromCartStart,emptyCartStart,  deleteProductFromCartStart } from '../state/cart.actions';
 import { ofType } from '@ngrx/effects';
 
 @Component({
@@ -73,8 +74,8 @@ getSubtotal(): any{
   }
 
   placeOrder(): void {
-    const auth =this.user;
-   this.store.dispatch(emptyCartStart({ auth }));
+    const cart= this.cart;
+    this.store.dispatch(cartPlaceOrderStart({ cart }));
  }
 
 }

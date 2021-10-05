@@ -3,11 +3,15 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Router } from "@angular/router";
 import { CartService } from "src/app/services/cartService";
 import { cartLoadStart , cartLoadSuccess, deleteProcedureFromCartStart ,deleteProcedureFromCartSuccess ,
-  deleteProductFromCartStart ,deleteProductFromCartSuccess ,emptyCartStart , emptyCartSuccess } from "./cart.actions";
+  deleteProductFromCartStart ,deleteProductFromCartSuccess ,cartPlaceOrderStart, cartPlaceOrderSuccess ,emptyCartStart , emptyCartSuccess } from "./cart.actions";
 import { map , switchMap ,exhaustMap } from 'rxjs/operators';
 import { User } from '../../../models/user';
 import { Cart } from '../../../models/cart';
+import { Order } from '../../../models/order';
+import { Product } from '../../../models/product';
+import{ Procedure } from '../../../models/procedure';
 import { ItemDeleteAndUserId } from "src/app/models/itemDeleteAndUserId";
+
 
 @Injectable()
 export class CartEffects{
@@ -80,6 +84,30 @@ export class CartEffects{
             map((data) => {
               this.router.navigate(['/cart']);
               return emptyCartSuccess({ auth: data ,message: 'Success' });
+            })
+          );
+        })
+      );
+    });
+
+    placeOrderCart$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(cartPlaceOrderStart),
+        exhaustMap((action) => {
+          const cart: Cart = JSON.parse(localStorage.getItem('cart'));
+          const user: User = JSON.parse(localStorage.getItem('userData'));
+         let products : Product [] =cart.products;
+         let procedures: Procedure [] =cart.procedures;
+          const order: Order = {
+              procedures,
+              products,
+              user
+          };
+          console.log(order);
+          return this.cartService.placeOrder(order).pipe(
+            map((data) => {
+              this.router.navigate(['/']);
+              return cartPlaceOrderSuccess({ cart: data ,message: 'Success' });
             })
           );
         })

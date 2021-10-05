@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
 import { OrderService } from "src/app/services/orderService";
-import { updateOrderSuccess , updateOrderStart } from "./order.actions";
+import { updateOrderSuccess ,allOrdersStart, allOrdersSuccess, updateOrderStart } from "./order.actions";
 import { Order } from "src/app/models/order";
 
 
@@ -31,6 +31,22 @@ updateOrder$ = createEffect(() => {
  })
  );
 });
+
+ 
+allOrders$ = createEffect(() => {
+  return this.actions$.pipe
+  (ofType(allOrdersStart),
+  exhaustMap((action) => {
+    return this.orderService.getAllOrders().pipe(map((data) => {
+        console.log(data);
+        localStorage.setItem('order', JSON.stringify(data)); 
+        return allOrdersSuccess({ orders : data ,message: 'Success' });
+    })
+    );
+  })
+  );
+ });
+
 
 }
 

@@ -1,11 +1,11 @@
-import {User} from './user';
+import { User } from './user';
+import { Product } from './product';
+import { Procedure } from './procedure';
 
 export interface Order {
   id?: string;
-  description?: string;
   price?: number;
-  procedure?: string;
-  product?: string;
-  username?: User;
-
+  products?: Product [],
+  procedures?: Procedure [],
+  user?: User;
 }

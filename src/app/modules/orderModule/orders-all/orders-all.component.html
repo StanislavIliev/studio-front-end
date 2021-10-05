@@ -7,10 +7,7 @@
             <div
               *ngFor = "let order of orders"
             >
-              <h5>{{order.description}}</h5>
-              <p>{{order.price}}</p>
-
-
+              <p>{{ order.user.username }}</p>
               <a href="../order-update" class="btn btn-info">Update order</a>
               <a href="../order" class="btn btn-info">Delete order</a>
 

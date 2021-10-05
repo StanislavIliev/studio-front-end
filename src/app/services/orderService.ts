@@ -15,7 +15,7 @@ export class OrderService {
     return this.http.get<Order[]>('http://localhost:8080/orders/all');
   }
 
-  public addOrderForm(order: Order): Observable<Order> {
+  addOrderForm(order: Order): Observable<Order> {
     return this.http.post<Order>(`http://localhost:8080/orders/add`, order);
   }
 

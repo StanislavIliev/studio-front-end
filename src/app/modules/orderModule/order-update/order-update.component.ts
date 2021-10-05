@@ -23,12 +23,7 @@ export class OrderUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.updateOrderForm = new FormGroup({
-      description: new FormControl(null),
-      procedure: new FormControl(null),
-      product: new FormControl(null),
-      user: new FormControl(this.user)
-    });
+  
   }
 
   updateOrder(): any {

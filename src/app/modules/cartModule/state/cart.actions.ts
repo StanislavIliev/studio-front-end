@@ -36,13 +36,13 @@ export const emptyCartSuccess = createAction(EMPTY_CART_SUCCESS, props<{ auth: U
 export const emptyCartFail = createAction(EMPTY_CART_FAIL, props<{message: string}>());
 
 
-export const SUBTOTAL_CART_START = '[auth] subtotal cart start';
-export const SUBTOTAL_CART_SUCCESS = '[auth] subtotal cart success';
-export const SUBTOTAL_CART_FAIL = '[auth] subtotal cart fail';
+export const CART_PLACE_ORDER_START = '[auth] cart place order start';
+export const CART_PLACE_ORDER_SUCCESS = '[auth] cart place order success';
+export const CART_PLACE_ORDER_FAIL = '[auth] cart place order fail';
 
-export const subtotalCartStart = createAction(SUBTOTAL_CART_START, props<{ cart: Cart}>());
-export const subtotalCartSuccess = createAction(SUBTOTAL_CART_SUCCESS, props<{ cart: Cart , message: string}>());
-export const subtotalCartFail = createAction(SUBTOTAL_CART_FAIL, props<{message: string}>());
+export const cartPlaceOrderStart = createAction(CART_PLACE_ORDER_START, props<{ cart: Cart }>());
+export const cartPlaceOrderSuccess = createAction(CART_PLACE_ORDER_SUCCESS, props<{ cart: Cart , message: string}>());
+export const cartPlaceOrderFail = createAction(CART_PLACE_ORDER_FAIL, props<{message: string}>());
 
 export const UPDATE_DGALAL = '[auth] delete product from cart fail';
 

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Order} from '../../../models/order';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { Order } from '../../../models/order';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrderService } from '../../../services/orderService';
 import { User } from '../../../models/user';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -23,12 +23,6 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addOrderForm = new FormGroup({
-      description: new FormControl('' , [Validators.required, Validators.pattern('[A-Za-z0-9 ]+')]),
-      procedure: new FormControl(null),
-      product: new FormControl(null),
-      user: new FormControl(this.user)
-    });
   }
 
   addOrder(): any {
@@ -42,10 +36,4 @@ export class OrderComponent implements OnInit {
       });
   }
 
-  getOrderById(orderId: string): void{
-    this.orderService.getOrderById(orderId)
-      .subscribe((response) => {
-        this.order = response;
-      });
-  }
 }

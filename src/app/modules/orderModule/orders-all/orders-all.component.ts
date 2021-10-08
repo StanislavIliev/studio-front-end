@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from '../../../models/order';
-import { OrderService } from '../../../services/orderService';
 import { User } from '../../../models/user';
 import { AppState } from 'src/app/store/app.state';
 import { Store ,ActionsSubject } from '@ngrx/store';
@@ -18,7 +17,6 @@ export class OrdersAllComponent implements OnInit {
   orders: Order [];
   
   constructor(
-     private orderService: OrderService,
      private store: Store<AppState>,
      private actionListener: ActionsSubject,
      ){
@@ -27,8 +25,8 @@ export class OrdersAllComponent implements OnInit {
 
  ngOnInit(): void {
    this.actionListener.pipe(ofType(ALL_ORDERS_SUCCESS)).subscribe((data:any)=>{
-     console.log(data);
-     this.orders= data;
+     console.log(data.orders);
+     this.orders= data.orders;
    });
     this.getCurrentOrders();
  }
@@ -38,5 +36,10 @@ export class OrdersAllComponent implements OnInit {
      this.orders = JSON.parse(ordersDataString);
      console.log(this.orders);
      return this.orders;
+   }
+
+   addProcedureToCart(order){
+    
+
    }
 }

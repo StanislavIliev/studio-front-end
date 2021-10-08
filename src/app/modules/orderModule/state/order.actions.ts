@@ -24,3 +24,11 @@ export const ALL_ORDERS_FAIL = '[auth] all orders fail';
 export const allOrdersStart = createAction(ALL_ORDERS_START);
 export const allOrdersSuccess = createAction(ALL_ORDERS_SUCCESS, props<{orders: any ,message: string }>());
 export const allOrdersFail = createAction(ALL_ORDERS_FAIL, props<{message: string}>());
+
+export const ORDER_DETAILS_START = '[auth] order details start';
+export const ORDER_DETAILS_SUCCESS = '[auth] order details success';
+export const ORDER_DETAILS_FAIL = '[auth] order details fail';
+
+export const orderDetailsStart = createAction(ORDER_DETAILS_START, props<{order: Order}>());
+export const orderDetailsSuccess = createAction(ORDER_DETAILS_SUCCESS, props<{order: Order ,message: string }>());
+export const orderDetailsFail = createAction(ORDER_DETAILS_FAIL, props<{message: string}>());

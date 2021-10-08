@@ -5,7 +5,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
 import { OrdersAllComponent } from "./orders-all/orders-all.component";
-import { OrderUpdateComponent } from "./order-update/order-update.component";
 import { OrderComponent } from "./order/order.component";
 import { OrderDetailsComponent } from "./order-details/order-details.component";
 import { OrderEffects } from "./state/order.effects";
@@ -15,18 +14,15 @@ import { ORDER_STATE_NAME } from "./state/order.selector";
 const routes: Routes = [
     {path: 'order', component: OrderComponent},
     {path: 'orders-all', component: OrdersAllComponent},
-    {path: 'order-details', component: OrderDetailsComponent},
-    {path: 'order-update/:id', component: OrderUpdateComponent},
-    
+    {path: 'order-details', component: OrderDetailsComponent},    
   ]
     
 @NgModule({
   declarations: [
     OrdersAllComponent,
     OrderComponent,
-    OrderDetailsComponent,
-    OrderUpdateComponent
-  ],
+    OrderDetailsComponent
+    ],
   imports: [ 
     CommonModule ,
     ReactiveFormsModule,

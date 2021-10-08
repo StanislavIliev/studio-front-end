@@ -27,7 +27,4 @@ export class OrderService {
     return this.http.post(`http://localhost:8080/orders/delete/`, order);
   }
 
-  updateOrderForm(order: Order): Observable<Order> {
-    return this.http.post<Order>(`http://localhost:8080/orders/update`, order);
-  }
 }

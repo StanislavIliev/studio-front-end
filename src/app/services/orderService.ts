@@ -23,8 +23,12 @@ export class OrderService {
     return this.http.get(`http://localhost:8080/orders/${id}`);
   }
 
-  deleteOrderById(order: Order): Observable<Order> {
-    return this.http.post(`http://localhost:8080/orders/delete/`, order);
+  getMyOrders(id: string): Observable<Order[]> {
+    return this.http.get<Order[]>(`http://localhost:8080/orders/myorders/${id}`);
+  }
+
+  deleteOrderById(id: string): Observable<Order> {
+    return this.http.post(`http://localhost:8080/orders/delete/`, id);
   }
 
 }

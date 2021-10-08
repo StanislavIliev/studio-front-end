@@ -3,7 +3,7 @@ import { Order } from '../../../models/order';
 import { User } from '../../../models/user';
 import { AppState } from 'src/app/store/app.state';
 import { Store ,ActionsSubject } from '@ngrx/store';
-import { allOrdersStart, ALL_ORDERS_SUCCESS } from '../state/order.actions';
+import { allOrdersStart,orderDetailsStart , ALL_ORDERS_SUCCESS } from '../state/order.actions';
 import { ofType } from '@ngrx/effects';
  
 @Component({
@@ -32,14 +32,13 @@ export class OrdersAllComponent implements OnInit {
  }
 
   getCurrentOrders(){
-     const ordersDataString = localStorage.getItem('order'); 
+     const ordersDataString = localStorage.getItem('orders'); 
      this.orders = JSON.parse(ordersDataString);
      console.log(this.orders);
      return this.orders;
    }
 
-   addProcedureToCart(order){
-    
-
+   orderDetails(id: string){
+    this.store.dispatch(orderDetailsStart({ id }));
    }
 }

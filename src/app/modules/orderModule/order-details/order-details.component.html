@@ -1,0 +1,46 @@
+<div>
+    <section id="cover" class="min-vh-100">
+      <div id="cover-caption">
+        <div class="container">
+          <div class="row text-white">
+            <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">       
+  
+                <table class="table shop-table" *ngIf="order.products">
+                  <tr>
+                    <th class="b-0">Item</th>
+                    <th class="b-0">Price</th>
+                    <th class="b-0 text-right">Date</th>
+                  </tr>
+                  <tr *ngFor="let product of order.products">
+                    <td>{{ product.name }}</td>
+                    <td class="text-right">
+                      <h5 class="font-medium m-b-30">{{ product.price }} $</h5>
+                    </td>
+                    <td>
+    
+                    </td>
+                  </tr>
+                  <tr *ngFor="let procedure of order.procedures">
+                    <td>{{ procedure.name }}</td>
+                    <td class="text-right">
+                      <h5 class="font-medium m-b-30">{{ procedure.price }} $</h5>
+                    </td>
+                    <td> {{ procedure.date }}</td>
+                  </tr>
+                  <tr>
+                    <td> Ordered by </td>
+                    <td>               
+                         {{ order.user.username }}
+                     </td>
+                    <td> </td>
+                  </tr>
+                </table>
+                <button (click)="deleteOrder(order.id)" class="btn btn-danger mr-2">Delete order</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  

@@ -1,8 +1,8 @@
-import { Component, OnInit , Input} from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { Order } from '../../../models/order';
-import { OrderService } from '../../../services/orderService';
-import { AuthService } from '../../../services/auth.service';
+import { AppState } from 'src/app/store/app.state';
+import { Store } from '@ngrx/store';
+import { deleteOrderStart } from '../state/order.actions';
 
 @Component({
   selector: 'app-order-details',
@@ -10,16 +10,21 @@ import { AuthService } from '../../../services/auth.service';
   styleUrls: ['./order-details.component.scss']
 })
 export class OrderDetailsComponent implements OnInit {
-  @Input()
-  order: Order;
+  
+  order: Order = JSON.parse(localStorage.getItem('order'));
 
   constructor(
-    private orderService: OrderService,
-    private router: Router,
-    private authService: AuthService
+    private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {
+  }
+
+  
+  deleteOrder(id: string) {
+    if (confirm('Are you sure you want to delete')) {
+      this.store.dispatch(deleteOrderStart({ id }));
+    }
   }
 
 }

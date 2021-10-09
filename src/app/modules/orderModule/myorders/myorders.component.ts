@@ -13,18 +13,18 @@ import { ofType } from '@ngrx/effects';
 })
 export class MyordersComponent implements OnInit {
 
-  user: User = JSON.parse(localStorage.getItem('user'));
+  user: User = JSON.parse(localStorage.getItem('userData'));
   orders: Order [];
  
   constructor(
       private store: Store<AppState>,
       private actionListener: ActionsSubject,
     ) {
-     // const id = this.user.id;
-     // this.store.dispatch(myOrdersStart({ id }));
+      const id = this.user.id;
+      this.store.dispatch(myOrdersStart({ id }));
 
   }
-
+  
   ngOnInit(): void {
     this.actionListener.pipe(ofType(MY_ORDERS_SUCCESS)).subscribe((data:any)=>{
       console.log(data.orders);

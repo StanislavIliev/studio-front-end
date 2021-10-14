@@ -106,7 +106,7 @@ export class CartEffects{
           console.log(order);
           return this.cartService.placeOrder(order).pipe(
             map((data) => {
-              this.router.navigate(['/']);
+              this.router.navigate(['/myorders']);
               return cartPlaceOrderSuccess({ cart: data ,message: 'Success' });
             })
           );

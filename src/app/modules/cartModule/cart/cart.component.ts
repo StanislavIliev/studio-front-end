@@ -76,6 +76,7 @@ getSubtotal(): any{
   placeOrder(): void {
     const cart= this.cart;
     this.store.dispatch(cartPlaceOrderStart({ cart }));
+    this.emptyCart();
  }
 
 }

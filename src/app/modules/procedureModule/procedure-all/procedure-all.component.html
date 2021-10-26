@@ -16,11 +16,11 @@
             <p>{{ procedure.description }}</p>
 
             <div class="ms-panel-custom">
-              <a [routerLink]="['/procedure-update',procedure.id]" class="btn btn-primary mr-2  ms-custom-btn">Update</a>
-              <button (click)="deleteProcedure(procedure.id)" class="btn btn-danger mr-2">Delete</button>
+              <a  *ngIf= "isLogged" [routerLink]="['/procedure-update',procedure.id]" class="btn btn-primary mr-2  ms-custom-btn">Update</a>
+              <button  *ngIf= "isLogged" (click)="deleteProcedure(procedure.id)" class="btn btn-danger mr-2">Delete</button>
             </div>
             <div>
-              <button (click)="addProcedureToCart(procedure)" class="btn btn-primary mr-2">Add to Cart</button>
+              <button *ngIf= "isLogged"  (click)="addProcedureToCart(procedure)" class="btn btn-primary mr-2">Add to Cart</button>
             </div>
 
           </div>

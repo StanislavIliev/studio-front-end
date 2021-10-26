@@ -6,6 +6,7 @@ import { allProceduresStart, ALL_PROCEDURES_SUCCESS,
 import { Store,ActionsSubject } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { User } from 'src/app/models/user';
+import { isAuthenticated } from '../../../auth/state/auth.selector';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class ProcedureAllComponent implements OnInit {
 
   procedures: Procedure[] =  [];
   loggedUser: User;
+  isLogged: boolean=false;
 
   constructor(
     private actionListener: ActionsSubject,
@@ -30,6 +32,9 @@ export class ProcedureAllComponent implements OnInit {
     this.actionListener.pipe(ofType(ALL_PROCEDURES_SUCCESS)).subscribe((data:any)=>{
     this.procedures= data.procedures;
   });
+  this.store.select(isAuthenticated).subscribe((bbb) => {
+    this.isLogged=bbb;
+  })
   }
 
   deleteProcedure(id: string) {

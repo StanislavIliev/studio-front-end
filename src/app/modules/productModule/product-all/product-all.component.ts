@@ -6,6 +6,7 @@ import { AppState } from 'src/app/store/app.state';
 import { Observable } from 'rxjs';
 import { addProductToCartStart, allProductsStart, ALL_PRODUCTS_SUCCESS , deleteProductStart } from '../state/product.actions';
 import { ofType } from '@ngrx/effects';
+import { isAuthenticated } from '../../../auth/state/auth.selector';
  
 
 @Component({
@@ -17,6 +18,8 @@ export class ProductAllComponent implements OnInit {
 
   products: Observable<Product[]>;
   loggedUser :User;
+  isLogged: boolean=false;
+
   constructor(
     private store: Store<AppState>,
     private actionListener: ActionsSubject
@@ -29,6 +32,9 @@ export class ProductAllComponent implements OnInit {
       this.actionListener.pipe(ofType(ALL_PRODUCTS_SUCCESS)).subscribe((data:any)=>{
         this.products= data.products;
       });
+      this.store.select(isAuthenticated).subscribe((bbb) => {
+        this.isLogged=bbb;
+      })
     }
   
     deleteProduct(id: string) {

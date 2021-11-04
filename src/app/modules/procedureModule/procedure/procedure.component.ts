@@ -35,7 +35,6 @@ export class ProcedureComponent implements OnInit {
 
   addProcedure(): any { 
       const newProcedure: Procedure = {...this.addProcedureForm.value};
-      console.log(newProcedure);
       this.store.dispatch(addProcedureStart({ newProcedure }));
   }
 

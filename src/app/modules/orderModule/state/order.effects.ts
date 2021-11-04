@@ -35,7 +35,6 @@ detailsOrder$ = createEffect(() => {
   exhaustMap((action) => {
     return this.orderService.getOrderById(action.id).pipe(map((data) => {
       this.router.navigate(['/order-details']);
-      console.log(data);
       localStorage.setItem('order', JSON.stringify(data));            
      return orderDetailsSuccess({ order: data , message : 'success' });
     })
@@ -49,7 +48,6 @@ allOrders$ = createEffect(() => {
   (ofType(allOrdersStart),
   exhaustMap((action) => {
     return this.orderService.getAllOrders().pipe(map((data) => {
-        console.log(data);
         localStorage.setItem('orders', JSON.stringify(data)); 
         return allOrdersSuccess({ orders : data ,message: 'Success' });
     })
@@ -63,7 +61,6 @@ allOrders$ = createEffect(() => {
   (ofType(myOrdersStart),
   exhaustMap((action) => {
     return this.orderService.getMyOrders(action.id).pipe(map((data) => {
-        console.log(data);
         localStorage.setItem('myorders', JSON.stringify(data)); 
         return myOrdersSuccess({ orders : data , message: 'Success' });
     })

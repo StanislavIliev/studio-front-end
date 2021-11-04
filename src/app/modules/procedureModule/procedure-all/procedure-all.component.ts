@@ -48,7 +48,6 @@ export class ProcedureAllComponent implements OnInit {
       userId:  this.loggedUser.id,
       procedureId: procedure.id
     };
-    console.log(procedureAndUserId);
     this.store.dispatch(addProcedureToCartStart({ procedureAndUserId }));
   }
 

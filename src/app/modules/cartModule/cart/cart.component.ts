@@ -32,7 +32,6 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.actionListener.pipe(ofType(CART_LOAD_SUCCESS)).subscribe((data:any)=>{
-      console.log(data.cart);
       this.cart= data.cart;
     });
      this.getCurrentCart();
@@ -42,7 +41,6 @@ export class CartComponent implements OnInit {
  getCurrentCart(){
       const cartDataString = localStorage.getItem('cart'); 
       this.cart = JSON.parse(cartDataString);
-      console.log(this.cart);
       return this.cart;
     }
     
@@ -69,7 +67,6 @@ getSubtotal(): any{
        this.cart.procedures.forEach(element => {
         total += element.price;
       });
-     console.log(total);
     return total;
   }
 

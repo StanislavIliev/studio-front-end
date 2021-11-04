@@ -25,7 +25,6 @@ export class OrdersAllComponent implements OnInit {
 
  ngOnInit(): void {
    this.actionListener.pipe(ofType(ALL_ORDERS_SUCCESS)).subscribe((data:any)=>{
-     console.log(data.orders);
      this.orders= data.orders;
    });
     this.getCurrentOrders();
@@ -34,7 +33,6 @@ export class OrdersAllComponent implements OnInit {
   getCurrentOrders(){
      const ordersDataString = localStorage.getItem('orders'); 
      this.orders = JSON.parse(ordersDataString);
-     console.log(this.orders);
      return this.orders;
    }
 

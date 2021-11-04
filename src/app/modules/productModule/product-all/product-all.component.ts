@@ -48,8 +48,6 @@ export class ProductAllComponent implements OnInit {
       userId:  this.loggedUser.id,
       productId: product.id
     };
-
-    console.log(productAndUserId);
     this.store.dispatch(addProductToCartStart({ productAndUserId }));
   }
 

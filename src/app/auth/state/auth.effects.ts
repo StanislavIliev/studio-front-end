@@ -29,7 +29,6 @@ export class AuthEffects{
     login$ = createEffect(() => {
       return this.actions$.pipe(
         ofType(loginStart),
-        // take(1),
         exhaustMap((action) => {
           return this.authService.login(action.auth).pipe(
             map((data) => {
@@ -38,7 +37,6 @@ export class AuthEffects{
               sessionStorage.setItem('username', data.username);
               this.notifier.notify('success','Successfully logged in!');
               this.router.navigate(['/']);
-              console.log(data);
               return loginSuccess({
                 user: data,
                 message: 'You have successfully logged in.',
@@ -85,11 +83,6 @@ export class AuthEffects{
           );
         }),
         catchError((errResp) => {
-          // this.store.dispatch(setLoadingSpinner({ status: false }));
-          //const errorMessage = this.authService.getErrorMessage(
-           // errResp.error.error.message
-          // );
-          // return of(setErrorMessage({ message: errorMessage }));
           this.notifier.notify('error','Error occured!');
           return EMPTY;
         })
@@ -162,7 +155,6 @@ resetPassword$ = createEffect(() => {
         ofType(authLogout),
         map((action) => {
           sessionStorage.clear();
-          // this.authService.logOut();
           this.notifier.notify('success','Successfully logged out!');
           this.router.navigate(['/login']);
         })

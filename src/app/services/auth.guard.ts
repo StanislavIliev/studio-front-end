@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
   constructor(private store: Store<AppState>, private router: Router) {}
 
   canActivate(
-    route: ActivatedRouteSnapshot,
+     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ):
     | boolean

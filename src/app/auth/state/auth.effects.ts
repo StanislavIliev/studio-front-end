@@ -155,6 +155,7 @@ resetPassword$ = createEffect(() => {
         ofType(authLogout),
         map((action) => {
           sessionStorage.clear();
+          localStorage.clear();
           this.notifier.notify('success','Successfully logged out!');
           this.router.navigate(['/login']);
         })

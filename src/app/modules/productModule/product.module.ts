@@ -15,7 +15,6 @@ const routes: Routes = [
     {path: 'product', component: ProductComponent},
     {path: 'product-all', component: ProductAllComponent},
     {path: 'product-update/:id', component: ProductUpdateComponent},
-    
   ]
     
 @NgModule({

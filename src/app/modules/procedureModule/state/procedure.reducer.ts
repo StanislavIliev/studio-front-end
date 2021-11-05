@@ -5,25 +5,6 @@ import { initialState } from "./procedure.state";
 
 const _procedureReducer = createReducer(
   initialState,
-//   on(addProcedureSuccess, (state, action ) => {
-//     let procedure = { ...action.procedure };
-//   return {
-//     ...state,
-//     procedures: [
-//       ...state.procedures,
-//     procedure
-//   ],
-// };
-// }), 
-// on(updateProcedureSuccess, (state, action) => {
-//       const updatedProcedures = state.procedures.map((procedure)=>{
-//         return action.procedure.id === procedure.id ? action.procedure : procedure;
-//       });
-//     return {
-//       ...state,
-//       procedures: updatedProcedures,
-//   };
-//   }), 
   on(allProceduresSuccess, (state, action) => {
   return {
     ...state,

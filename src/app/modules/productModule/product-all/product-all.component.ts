@@ -41,6 +41,7 @@ export class ProductAllComponent implements OnInit {
       if (confirm('Are you sure you want to delete')) {
         this.store.dispatch(deleteProductStart({ id }));
       }
+      
     }
   
   addProductToCart(product: Product): void{

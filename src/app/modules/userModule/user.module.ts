@@ -1,9 +1,13 @@
 import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
-import { RouterModule, Routes } from "@angular/router";
 import { EffectsModule } from "@ngrx/effects";
+import { StoreModule } from "@ngrx/store";
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
 import { UserUpdateComponent } from "./user-update/user-update.component";
+import { userReducer } from "./state/user.reducer";
+import { UserEffects } from "./state/user.effects";
+import { USER_STATE_NAME } from "./state/user.reducer";
 
 const routes: Routes = [
 { path: 'user-update', component: UserUpdateComponent}
@@ -16,7 +20,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    EffectsModule.forFeature(),
+    EffectsModule.forFeature([UserEffects]),
+    StoreModule.forFeature(USER_STATE_NAME , userReducer),
     RouterModule.forChild(routes)
   ], 
   exports:
@@ -27,3 +32,4 @@ const routes: Routes = [
 export class UserModule{
 
 }
+

@@ -21,7 +21,6 @@ const routes: Routes = [{
     CommonModule ,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    ReactiveFormsModule,
     StoreModule.forFeature(CART_STATE_NAME, cartReducer),
     EffectsModule.forFeature([CartEffects]),
   ]

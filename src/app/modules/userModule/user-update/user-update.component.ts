@@ -59,7 +59,6 @@ updateUsersForm(){
       lastName,
       phoneNumber
     };
-    console.log(updatedUser);
      this.store.dispatch(userUpdateStart({ updatedUser }));
 }
 

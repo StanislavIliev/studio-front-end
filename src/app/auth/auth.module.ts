@@ -15,6 +15,7 @@ const routes: Routes = [
 { path: 'response-reset/:id', component: ResponseResetComponent},
 ]
 
+
 @NgModule({
   declarations: [
     LoginComponent,

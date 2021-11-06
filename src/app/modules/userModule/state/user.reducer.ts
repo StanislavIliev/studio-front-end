@@ -10,7 +10,6 @@ const _userReducer = createReducer(
          const updatedUser = action.updatedUser;
        return {
          ...state,
-         isLogged: true ,
          user: updatedUser,
      };
      }), 

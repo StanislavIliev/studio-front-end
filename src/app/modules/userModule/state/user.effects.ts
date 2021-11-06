@@ -17,11 +17,11 @@ export class UserEffects{
     private notifier: NotifierService
     ){}
 
-  
-updateUser$ = createEffect(() => {
+  updateUser$ = createEffect(() => {
   return this.actions$.pipe
   (ofType(userUpdateStart),
   switchMap((action) => {
+    console.log(action.updatedUser);
     return this.authService.updateUser(action.updatedUser).pipe(map((data) => {
       this.router.navigate(['/']);
       console.log(data);

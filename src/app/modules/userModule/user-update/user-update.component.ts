@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup ,Validators } from '@angular/forms';
-import { User } from '../../models/user';
+import { User } from '../../../models/user';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
-import { userUpdateStart } from '../state/auth.actions';
+import { userUpdateStart } from '../state/user.actions';
 
 @Component({
   selector: 'app-user-update',
@@ -36,8 +36,8 @@ updateUsersForm(){
      this.updateUserForm = new FormGroup({
        username : new FormControl(this.updatingUser.username),
        id: new FormControl(this.updatingUser.id),
-      firstName: new FormControl(this.updatingUser.firstName, [Validators.required, Validators.pattern('[A-Za-z0-9]+')]),
-      lastName: new FormControl(this.updatingUser.lastName, [Validators.required, Validators.pattern('[A-Za-z0-9]+')]),
+      firstName: new FormControl(this.updatingUser.firstName, [Validators.required, Validators.pattern('[A-Za-z]+')]),
+      lastName: new FormControl(this.updatingUser.lastName, [Validators.required, Validators.pattern('[A-Za-z]+')]),
       phoneNumber: new FormControl(this.updatingUser.phoneNumber, [Validators.required, Validators.pattern('[+,0-9]+')])
     });
 
@@ -59,6 +59,7 @@ updateUsersForm(){
       lastName,
       phoneNumber
     };
+    console.log(updatedUser);
      this.store.dispatch(userUpdateStart({ updatedUser }));
 }
 

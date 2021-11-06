@@ -3,14 +3,21 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './modules/page/home-page/home-page.component';
 import { ContactComponent } from './modules/page/contact/contact.component';
 import { AuthGuard } from './services/auth.guard';
+import { LoggedGuard } from './services/logged.guard';
  
 const routes: Routes = [
   { 
     path: '', 
     component: HomePageComponent},
   {
-    path: 'auth',
+    path: '',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+    canActivate: [LoggedGuard]
+  },
+  {
+    path: '',
+    loadChildren: () => import('./modules/userModule/user.module').then((m) => m.UserModule),
+    canActivate: [AuthGuard]
   },
   {
     path: '',

@@ -7,14 +7,12 @@ import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { RequestResetComponent } from "./request-reset/request-reset.component";
 import { ResponseResetComponent } from "./response-reset/response-reset.component";
-import { UserUpdateComponent } from "./user-update/user-update.component";
 
 const routes: Routes = [
 { path: 'login', component: LoginComponent},
 { path: 'register', component: RegisterComponent},
 { path: 'request-reset', component: RequestResetComponent},
 { path: 'response-reset/:id', component: ResponseResetComponent},
-{ path: 'user-update', component: UserUpdateComponent}
 ]
 
 @NgModule({
@@ -23,7 +21,6 @@ const routes: Routes = [
     RegisterComponent,
     RequestResetComponent,
     ResponseResetComponent,
-    UserUpdateComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +34,6 @@ const routes: Routes = [
     RegisterComponent,
     ResponseResetComponent,
     RequestResetComponent,
-    UserUpdateComponent
   ]
 })
 export class AuthModule{

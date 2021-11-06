@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect , ofType } from "@ngrx/effects";
 import { autoLoginStart,autoLoginSuccess,autoLoginFail, authLogout,
    loginStart, loginSuccess, registerStart, registerSuccess, responsePasswordStart , responsePasswordSuccess , 
-   requestPaswordSuccess, requestPaswordStart ,userUpdateStart , userUpdateSuccess } from "./auth.actions";
+   requestPaswordSuccess, requestPaswordStart , } from "./auth.actions";
 import { AuthService } from '../../services/auth.service';
 import { catchError, exhaustMap , map , switchMap , tap} from 'rxjs/operators';
 import { Store } from "@ngrx/store";
@@ -10,9 +10,6 @@ import {  EMPTY, of } from "rxjs";
 import { Router } from "@angular/router";
 import { NotifierService } from "angular-notifier";
 import { AppState } from "src/app/store/app.state";
-import { setErrorMessage } from "src/app/store/shared/shared.action";
-import { User } from "src/app/models/user";
-
 
 @Injectable()
 export class AuthEffects{
@@ -88,22 +85,6 @@ export class AuthEffects{
         })
       );
     });
-
-    
-updateUser$ = createEffect(() => {
-  return this.actions$.pipe
-  (ofType(userUpdateStart),
-  switchMap((action) => {
-    return this.authService.updateUser(action.updatedUser).pipe(map((data) => {
-      this.router.navigate(['/']);
-      localStorage.setItem('userData', JSON.stringify(data));
-     return userUpdateSuccess({ message: 'Success' , updatedUser: action.updatedUser });
-    })
-    );
-  })
-  );
- });
-
  requestEmailPassword$ = createEffect(() => {
   return this.actions$.pipe(
     ofType(requestPaswordStart),

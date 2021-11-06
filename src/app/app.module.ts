@@ -24,6 +24,7 @@ import { ProductModule } from './modules/productModule/product.module';
 import { ProcedureModule } from './modules/procedureModule/procedure.module';
 import { CartModule } from './modules/cartModule/cart.module';
 import { OrderModule } from './modules/orderModule/order.module';
+import { UserModule } from './modules/userModule/user.module';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { OrderModule } from './modules/orderModule/order.module';
         ProcedureModule,
         CartModule,
         OrderModule,
+        UserModule,
         NotifierModule.withConfig({
           position: {
             horizontal: {

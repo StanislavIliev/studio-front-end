@@ -36,8 +36,6 @@ export const responsePasswordStart = createAction(RESPONSE_PASSWORDS_START, prop
 export const responsePasswordSuccess = createAction(RESPONSE_PASSWORDS_SUCCESS, props<{auth: User , message: string}>());
 export const responsePasswordFail = createAction(RESPONSE_PASSWORDS_FAIL, props<{message: string}>());
 
-
-
 export const EMAIL_FORGOTTEN_PASSWORD = '[auth] email forgotten password start';
 export const EMAIL_FORGOTTEN_PASSWORD_SUCCESS = '[auth] email forgotten password success';
 export const EMAIL_FORGOTTEN_PASSWORD_FAIL = '[auth] email forgotten password fail';
@@ -45,16 +43,6 @@ export const EMAIL_FORGOTTEN_PASSWORD_FAIL = '[auth] email forgotten password fa
 export const requestPaswordStart = createAction(EMAIL_FORGOTTEN_PASSWORD, props<{auth: User}>());
 export const requestPaswordSuccess = createAction(EMAIL_FORGOTTEN_PASSWORD_SUCCESS, props<{auth: User ,message: string}>());
 export const requestPaswordFail = createAction(EMAIL_FORGOTTEN_PASSWORD_FAIL, props<{message: string}>());
-
-
-
-export const USER_UPDATE_START = '[auth] update user start';
-export const USER_UPDATE_SUCCESS = '[auth] update user success';
-export const USER_UPDATE_FAIL = '[auth] update user fail';
-
-export const userUpdateStart = createAction(USER_UPDATE_START , props<{ updatedUser : User }>());
-export const userUpdateSuccess = createAction(USER_UPDATE_SUCCESS , props<{ message:string , updatedUser : User }>());;
-export const userUpdateFail = createAction(USER_UPDATE_FAIL , props<{ message : string }>());;
 
 export const GET_ALL_USERS_START = '[user] get all users start';
 export const GET_ALL_USERS_SUCCESS = '[user] get all users success';
